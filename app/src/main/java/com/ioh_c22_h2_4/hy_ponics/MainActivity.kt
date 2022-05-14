@@ -1,8 +1,8 @@
-package com.ioh_c22_h2_4.sayurx
+package com.ioh_c22_h2_4.hy_ponics
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ioh_c22_h2_4.sayurx.databinding.ActivityMainBinding
+import com.ioh_c22_h2_4.hy_ponics.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

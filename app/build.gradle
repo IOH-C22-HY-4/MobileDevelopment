@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.ioh_c22_h2_4.sayurx"
+        applicationId "com.ioh_c22_h2_4.hy_ponics"
         minSdk 21
         targetSdk 32
         versionCode 1

@@ -1,4 +1,4 @@
-package com.ioh_c22_h2_4.sayurx
+package com.ioh_c22_h2_4.hy_ponics
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.ioh_c22_h2_4.sayurx", appContext.packageName)
+        assertEquals("com.ioh_c22_h2_4.hy_ponics", appContext.packageName)
     }
 }
