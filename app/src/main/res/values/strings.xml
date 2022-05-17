@@ -25,4 +25,8 @@
     <string name="version">Version 1.0.0</string>
     <string name="login">Login</string>
     <string name="login_your_hyponics">Login your Hy.ponics account</string>
+    <string name="titleArt">Title Article</string>
+    <string name="article_image">article image</string>
+    <string name="description">Description</string>
+    <string name="back">Back</string>
 </resources>
