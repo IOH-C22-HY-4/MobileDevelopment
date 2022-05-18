@@ -24,7 +24,7 @@
         android:textColor="?attr/colorPrimary"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/login_text"
+        android:text="@string/login_your_hyponics"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_image" />
 
