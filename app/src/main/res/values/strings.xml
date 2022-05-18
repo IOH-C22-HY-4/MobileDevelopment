@@ -14,4 +14,7 @@
     <string name="by_signing_text">By signing you agree to our</string>
     <string name="terms_text">terms of use and privacy notice</string>
     <string name="already_have_account">Already have an account ?</string>
+    <string name="imgWarning">Image Warning</string>
+    <string name="titleWarning">Tittle Warning</string>
+    <string name="detailWarning">Detail Warning</string>
 </resources>
