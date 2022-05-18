@@ -17,4 +17,10 @@
     <string name="imgWarning">Image Warning</string>
     <string name="titleWarning">Tittle Warning</string>
     <string name="detailWarning">Detail Warning</string>
+    <string name="account">Account</string>
+    <string name="theme">Theme</string>
+    <string name="language">Language</string>
+    <string name="about">About</string>
+    <string name="signOut">Sign Out</string>
+    <string name="version">Version 1.0.0</string>
 </resources>
