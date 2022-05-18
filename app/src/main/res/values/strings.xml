@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">HyPonics</string>
     <string name="created_by_team">Created By C22 HY04</string>
+    <string name="email">Email</string>
+    <string name="email_example">asdfgh@example.com</string>
+    <string name="password">Password</string>
+    <string name="clickable_login"><u>Login</u></string>
+    <string name="sign_up"><u>Sign up</u></string>
+    <string name="dont_have_an_account">Don\'t have an account ?</string>
+    <string name="clickable_sign_up"><u>Sign up</u></string>
+    <string name="sign_up_text">Create an account to be a Certified Hy.ponics</string>
+    <string name="name">Name</string>
+    <string name="name_example">Rahmat Dewa Wisnu</string>
+    <string name="by_signing_text">By signing you agree to our</string>
+    <string name="terms_text">terms of use and privacy notice</string>
+    <string name="already_have_account">Already have an account ?</string>
 </resources>
