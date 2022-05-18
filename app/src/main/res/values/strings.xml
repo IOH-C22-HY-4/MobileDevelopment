@@ -23,4 +23,6 @@
     <string name="about">About</string>
     <string name="signOut">Sign Out</string>
     <string name="version">Version 1.0.0</string>
+    <string name="login">Login</string>
+    <string name="login_your_hyponics">Login your Hy.ponics account</string>
 </resources>
