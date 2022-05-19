@@ -40,4 +40,7 @@
     <string name="address_example">Jl nin aja dulu</string>
     <string name="saveChange">save</string>
     <string name="btnChangeProfile">Button Change Profile</string>
+    <string name="tanaman_name">Name Plant</string>
+    <string name="parameter">Parameter</string>
+    <string name="percent">0%</string>
 </resources>
