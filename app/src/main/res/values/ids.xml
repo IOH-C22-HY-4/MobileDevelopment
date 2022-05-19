@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="imgProfile" type="id">Image Profile</item>
+    <item name="btnChangeProfile" type="id">Button Change Profile</item>
+</resources>
