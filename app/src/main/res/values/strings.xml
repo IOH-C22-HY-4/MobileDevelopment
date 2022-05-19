@@ -23,6 +23,10 @@
     <string name="about">About</string>
     <string name="signOut">Sign Out</string>
     <string name="version">Version 1.0.0</string>
+    <string name="btnAdd">Button Add</string>
+    <string name="imgArticle">Image Article</string>
+    <string name="titleArticle">Tittle Article</string>
+    <string name="detailArticle">Detail Article</string>
     <string name="login">Login</string>
     <string name="login_your_hyponics">Login your Hy.ponics account</string>
     <string name="titleArt">Title Article</string>
