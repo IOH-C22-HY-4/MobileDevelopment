@@ -33,4 +33,11 @@
     <string name="article_image">article image</string>
     <string name="description">Description</string>
     <string name="back">Back</string>
+    <string name="imgProfile">Image Profile</string>
+    <string name="bio">Bio</string>
+    <string name="bio_example">I love lettuce so much</string>
+    <string name="address">Address</string>
+    <string name="address_example">Jl nin aja dulu</string>
+    <string name="saveChange">save</string>
+    <string name="btnChangeProfile">Button Change Profile</string>
 </resources>
