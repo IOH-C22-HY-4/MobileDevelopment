@@ -39,4 +39,5 @@
     <string name="address">Address</string>
     <string name="address_example">Jl nin aja dulu</string>
     <string name="saveChange">save</string>
+    <string name="btnChangeProfile">Button Change Profile</string>
 </resources>
