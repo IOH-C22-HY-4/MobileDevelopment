@@ -43,4 +43,6 @@
     <string name="tanaman_name">Name Plant</string>
     <string name="parameter">Parameter</string>
     <string name="percent">0%</string>
+    <string name="title_parameter">Parameter</string>
+    <string name="detail_parameter">Detail Parameter</string>
 </resources>
