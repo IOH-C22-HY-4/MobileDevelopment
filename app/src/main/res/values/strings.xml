@@ -49,4 +49,12 @@
     <string name="imgIOT">Image IOT</string>
     <string name="tvIOTResult">IoT Sensor Result</string>
     <string name="tvNameIOT">Tanaman Selalada</string>
+    <string name="today_weather">Today Weather</string>
+    <string name="temp">Temp</string>
+    <string name="sunlight">Sunlight</string>
+    <string name="humidity">Humidity</string>
+    <string name="clouds">Clouds</string>
+    <string name="hint_search">Search article</string>
+    <string name="popular_article">Popular Article</string>
+    <string name="other_article">Other Article</string>
 </resources>
