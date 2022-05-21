@@ -17,6 +17,9 @@
             android:name=".TanamanActivity"
             android:exported="false" />
         <activity
+            android:name=".IOTActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailProfile"
             android:exported="false" />
         <activity

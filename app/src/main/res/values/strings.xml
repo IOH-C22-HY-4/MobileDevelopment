@@ -45,4 +45,8 @@
     <string name="percent">0%</string>
     <string name="title_parameter">Parameter</string>
     <string name="detail_parameter">Detail Parameter</string>
+    <string name="editProfile">edit profile</string>
+    <string name="imgIOT">Image IOT</string>
+    <string name="tvIOTResult">IoT Sensor Result</string>
+    <string name="tvNameIOT">Tanaman Selalada</string>
 </resources>
