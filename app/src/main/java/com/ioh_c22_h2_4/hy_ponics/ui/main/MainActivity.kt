@@ -1,4 +1,4 @@
-package com.ioh_c22_h2_4.hy_ponics
+package com.ioh_c22_h2_4.hy_ponics.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

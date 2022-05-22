@@ -57,6 +57,12 @@
     <string name="hint_search">Search article</string>
     <string name="popular_article">Popular Article</string>
     <string name="other_article">Other Article</string>
+    <string name="information">Information</string>
+    <string name="login_success">Login Success</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="conti">Continue</string>
+    <string name="SignUp_success">SignUp Success</string>
+    <string name="SignUp_failed">SignUp Failed</string>
     <string name="home">Home</string>
     <string name="identification">Identification</string>
     <string name="market_place">Market Place</string>

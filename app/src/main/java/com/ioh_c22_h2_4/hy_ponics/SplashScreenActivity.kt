@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ioh_c22_h2_4.hy_ponics.databinding.ActivitySplashScreenBinding
+import com.ioh_c22_h2_4.hy_ponics.ui.check.CheckActivity
+import com.ioh_c22_h2_4.hy_ponics.ui.main.MainActivity
 import kotlinx.coroutines.delay
 
 @SuppressLint("CustomSplashScreen")
@@ -19,7 +21,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenCreated {
             delay(2000)
-            Intent(this@SplashScreenActivity, MainActivity::class.java).also {
+            Intent(this@SplashScreenActivity, CheckActivity::class.java).also {
                 startActivity(it)
                 finish()
             }

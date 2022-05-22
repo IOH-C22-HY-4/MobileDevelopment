@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".ui.login.LoginActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/login_image"
@@ -16,15 +16,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.68"
-        android:textColor="?attr/colorPrimary"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:alpha="0.68"
         android:text="@string/login_your_hyponics"
+        android:textColor="?attr/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_image" />
 
@@ -32,10 +45,10 @@
         android:id="@+id/label_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?attr/colorOnSurface"
-        android:textStyle="bold"
         android:layout_marginTop="24dp"
         android:text="@string/email"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/login_text"
         app:layout_constraintTop_toBottomOf="@+id/login_text" />
 
@@ -72,10 +85,10 @@
         android:id="@+id/label_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?attr/colorOnSurface"
-        android:textStyle="bold"
         android:layout_marginTop="24dp"
         android:text="@string/password"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/email_container"
         app:layout_constraintTop_toBottomOf="@+id/email_container" />
 
@@ -135,8 +148,8 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:textColor="?attr/colorPrimary"
         android:text="@string/sign_up"
+        android:textColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/dont_have_account"
         app:layout_constraintStart_toStartOf="@+id/dont_have_account"
