@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HyPonics" >
         <activity
-            android:name=".TanamanActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
