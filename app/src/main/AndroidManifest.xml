@@ -29,9 +29,6 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingMenu"
-            android:exported="false" />
-        <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/Theme.HyPonics.SplashScreen"
             android:exported="true">
