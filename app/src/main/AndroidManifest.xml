@@ -17,9 +17,6 @@
             android:name=".TanamanActivity"
             android:exported="false" />
         <activity
-            android:name=".IOTActivity"
-            android:exported="false" />
-        <activity
             android:name=".NotificationMenu"
             android:exported="false" />
         <activity
