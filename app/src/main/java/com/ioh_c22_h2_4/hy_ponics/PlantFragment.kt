@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentCameraBinding
+import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentPlantBinding
 
-class TanamanFragment : Fragment() {
-    private var _binding: FragmentCameraBinding? = null
+class PlantFragment : Fragment() {
+    private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -16,7 +16,7 @@ class TanamanFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCameraBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantBinding.inflate(inflater, container, false)
         return binding.root
     }
 
