@@ -37,7 +37,11 @@
         android:id="@+id/cameraFragment"
         android:name="com.ioh_c22_h2_4.hy_ponics.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_tanamanFragment"
+            app:destination="@id/tanamanFragment" />
+    </fragment>
     <fragment
         android:id="@+id/IOTFragment"
         android:name="com.ioh_c22_h2_4.hy_ponics.IOTFragment"
@@ -52,6 +56,9 @@
         <action
             android:id="@+id/action_IOTFragment_to_notificationMenuFragment"
             app:destination="@id/notificationMenuFragment" />
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/detailProfileFragment"
@@ -77,4 +84,13 @@
         android:name="com.ioh_c22_h2_4.hy_ponics.MarketPlaceFragment"
         android:label="fragment_market_place"
         tools:layout="@layout/fragment_market_place" />
+    <fragment
+        android:id="@+id/tanamanFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.TanamanFragment"
+        android:label="fragment_tanaman"
+        tools:layout="@layout/fragment_tanaman" >
+        <action
+            android:id="@+id/action_tanamanFragment_to_identificationMenuFragment"
+            app:destination="@id/identificationMenuFragment" />
+    </fragment>
 </navigation>
