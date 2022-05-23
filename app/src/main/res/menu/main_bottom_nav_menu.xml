@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_24"
+        android:orderInCategory="1"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/identificationMenuFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bookmark"
+        android:orderInCategory="2"
+        android:title="@string/identification" />
+
+    <item
+        android:id="@+id/marketPlaceFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_shopping_cart"
+        android:orderInCategory="3"
+        android:title="@string/market_place" />
+
+    <item
+        android:id="@+id/IOTFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:orderInCategory="4"
+        android:title="@string/profile" />
+</menu>

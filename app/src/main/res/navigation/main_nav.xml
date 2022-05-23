@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailArticleFragment"
+            app:destination="@id/detailArticleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailArticleFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.DetailArticleFragment"
+        android:label="fragment_detail_article"
+        tools:layout="@layout/fragment_detail_article">
+        <argument
+            android:name="idArticle"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/identificationMenuFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.IdentificationMenuFragment"
+        android:label="fragment_identification_menu"
+        tools:layout="@layout/fragment_identification_menu">
+        <action
+            android:id="@+id/action_identificationMenuFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_tanamanFragment"
+            app:destination="@id/tanamanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/IOTFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.IOTFragment"
+        android:label="fragment_iot"
+        tools:layout="@layout/fragment_iot">
+        <action
+            android:id="@+id/action_IOTFragment_to_detailProfileFragment"
+            app:destination="@id/detailProfileFragment" />
+        <action
+            android:id="@+id/action_IOTFragment_to_settingMenuFragment"
+            app:destination="@id/settingMenuFragment" />
+        <action
+            android:id="@+id/action_IOTFragment_to_notificationMenuFragment"
+            app:destination="@id/notificationMenuFragment" />
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailProfileFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.DetailProfileFragment"
+        android:label="fragment_detail_profile"
+        tools:layout="@layout/fragment_detail_profile">
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingMenuFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.SettingMenuFragment"
+        android:label="fragment_setting_menu"
+        tools:layout="@layout/fragment_setting_menu" />
+    <fragment
+        android:id="@+id/notificationMenuFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.NotificationMenuFragment"
+        android:label="fragment_notification_menu"
+        tools:layout="@layout/fragment_notification_menu" />
+    <fragment
+        android:id="@+id/marketPlaceFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.MarketPlaceFragment"
+        android:label="fragment_market_place"
+        tools:layout="@layout/fragment_market_place" />
+    <fragment
+        android:id="@+id/tanamanFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.PlantFragment"
+        android:label="fragment_tanaman"
+        tools:layout="@layout/fragment_plant" >
+        <action
+            android:id="@+id/action_tanamanFragment_to_identificationMenuFragment"
+            app:destination="@id/identificationMenuFragment" />
+    </fragment>
+</navigation>
