@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -17,6 +20,7 @@ import com.ioh_c22_h2_4.hy_ponics.R
 import com.ioh_c22_h2_4.hy_ponics.data.helper.UserPreference
 import com.ioh_c22_h2_4.hy_ponics.databinding.ActivityLoginBinding
 import com.ioh_c22_h2_4.hy_ponics.ui.ViewModelFactory
+import com.ioh_c22_h2_4.hy_ponics.ui.signup.SignUpActivity
 import com.ioh_c22_h2_4.hy_ponics.util.ApiCallbackString
 import com.ioh_c22_h2_4.hy_ponics.util.isEmailValid
 
@@ -33,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
         setupViewModel()
         setMyButtonEnable()
+        setSignUp()
         editTextListener()
         buttonListener()
         showLoading()
@@ -128,6 +133,16 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun setSignUp() {
+        binding.signUp.setOnClickListener {
+            register()
+        }
+    }
+
+    private fun register() {
+        startActivity(Intent(this, SignUpActivity::class.java))
     }
 
 }

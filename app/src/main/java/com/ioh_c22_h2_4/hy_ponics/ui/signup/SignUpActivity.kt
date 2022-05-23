@@ -7,13 +7,10 @@ import android.os.Bundle
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.ioh_c22_h2_4.hy_ponics.R
 import com.ioh_c22_h2_4.hy_ponics.databinding.ActivitySignUpBinding
 import com.ioh_c22_h2_4.hy_ponics.ui.login.LoginActivity
@@ -36,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
         showLoading()
     }
 
-    private fun playAnimation() {
+    private fun playAnimation(){
         val email = ObjectAnimator.ofFloat(binding.etEmail, View.ALPHA, 1f).setDuration(500)
         val name = ObjectAnimator.ofFloat(binding.etName, View.ALPHA, 1f).setDuration(500)
         val password = ObjectAnimator.ofFloat(binding.etPassword, View.ALPHA, 1f).setDuration(500)
@@ -112,7 +109,7 @@ class SignUpActivity : AppCompatActivity() {
         } else {
             AlertDialog.Builder(this).apply {
                 setTitle(getString(R.string.information))
-                setMessage(getString(R.string.SignUp_failed) + ", $message")
+                setMessage(getString(R.string.SignUp_failed)+", $message")
                 setPositiveButton(getString(R.string.conti)) { _, _ ->
                     binding.progressBar.visibility = View.GONE
                 }
