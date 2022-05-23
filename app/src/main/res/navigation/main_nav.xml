@@ -72,4 +72,9 @@
         android:name="com.ioh_c22_h2_4.hy_ponics.NotificationMenuFragment"
         android:label="fragment_notification_menu"
         tools:layout="@layout/fragment_notification_menu" />
+    <fragment
+        android:id="@+id/marketPlaceFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.MarketPlaceFragment"
+        android:label="fragment_market_place"
+        tools:layout="@layout/fragment_market_place" />
 </navigation>
