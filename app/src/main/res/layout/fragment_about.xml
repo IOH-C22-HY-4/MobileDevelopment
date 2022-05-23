@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/hyPonics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/hyPonics"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/aboutApp"
+        android:layout_width="328dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/aboutThisApp"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/hyPonics"
+        app:layout_constraintStart_toStartOf="@+id/hyPonics"
+        app:layout_constraintTop_toBottomOf="@+id/hyPonics"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/features"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/features"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutApp" />
+
+    <TextView
+        android:id="@+id/identificationFeatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/identificationFeatures"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/features"
+        app:layout_constraintTop_toBottomOf="@+id/features" />
+
+    <TextView
+        android:id="@+id/moreToComeFeatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/moreToComeFeatures"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/identificationFeatures"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/identificationFeatures"
+        app:layout_constraintTop_toBottomOf="@+id/identificationFeatures" />
+
+    <TextView
+        android:id="@+id/needHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/needHelp"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/moreToComeFeatures"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/moreToComeFeatures"
+        app:layout_constraintTop_toBottomOf="@+id/moreToComeFeatures" />
+
+    <TextView
+        android:id="@+id/detailNeedhelp"
+        android:layout_width="339dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/detailNeedHelp"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/needHelp"
+        app:layout_constraintTop_toBottomOf="@+id/needHelp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
