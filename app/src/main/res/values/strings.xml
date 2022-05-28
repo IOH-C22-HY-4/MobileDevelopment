@@ -61,4 +61,18 @@
     <string name="identification">Identification</string>
     <string name="market_place">Market Place</string>
     <string name="profile">Profile</string>
+    <string name="aboutThisApp">Hydroponics is a plant cultivation technique that does not require a large area of land, IoT
+integrated with a mobile application will greatly assist this activity. IoT is used to obtain plant
+parameter values that can be monitored remotely. The measured value activates the actuator
+and ensures that the measured value is not below the limit. Meanwhile, mobile applications can
+manage and control IoT. This technology can be maximized with machine learning, which is to
+detect plant diseases, forecast the weather, and predict the sunspot.</string>
+    <string name="hyPonics">Hy.ponics</string>
+    <string name="features">FEATURES</string>
+    <string name="identificationFeatures">- Plant Identification</string>
+    <string name="moreToComeFeatures">- More to Come!</string>
+    <string name="needHelp">NEED HELP?</string>
+    <string name="detailNeedHelp">You\'ve got questions, we\'ve got answer! Hit us up here :  m2006f0556@bangkit.academy</string>
+    <string name="notification">Notification</string>
+    <string name="itemsetting">Setting</string>
 </resources>
