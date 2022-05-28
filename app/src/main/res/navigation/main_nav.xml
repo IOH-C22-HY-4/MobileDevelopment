@@ -73,7 +73,11 @@
         android:id="@+id/settingMenuFragment"
         android:name="com.ioh_c22_h2_4.hy_ponics.SettingMenuFragment"
         android:label="fragment_setting_menu"
-        tools:layout="@layout/fragment_setting_menu" />
+        tools:layout="@layout/fragment_setting_menu" >
+        <action
+            android:id="@+id/action_settingMenuFragment_to_aboutFragment2"
+            app:destination="@id/aboutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationMenuFragment"
         android:name="com.ioh_c22_h2_4.hy_ponics.NotificationMenuFragment"
@@ -93,4 +97,9 @@
             android:id="@+id/action_tanamanFragment_to_identificationMenuFragment"
             app:destination="@id/identificationMenuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>
