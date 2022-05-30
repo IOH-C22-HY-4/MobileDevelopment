@@ -3,6 +3,7 @@ package com.ioh_c22_h2_4.hy_ponics
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.Intent.ACTION_GET_CONTENT
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIdentificationMenuBinding
 import com.ioh_c22_h2_4.hy_ponics.util.Util.createTempFile
@@ -44,6 +46,14 @@ class IdentificationMenuFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val photo = File(currentPhotoPath)
+            }
+        }
+
+    private val launcherIntentGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val uri = it.data?.data as Uri
+                val photo = uri.toFile()
             }
         }
 
@@ -116,6 +126,16 @@ class IdentificationMenuFragment : Fragment() {
             }
         }.also {
             launcherIntentCamera.launch(it)
+        }
+    }
+
+    private fun startGallery() {
+        Intent().apply {
+            action = ACTION_GET_CONTENT
+            type = "image/*"
+        }.also {
+            val chooser = Intent.createChooser(it, "Choose a picture")
+            launcherIntentGallery.launch(chooser)
         }
     }
 
