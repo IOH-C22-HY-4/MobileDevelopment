@@ -131,7 +131,7 @@ class CameraFragment : Fragment() {
                         Log.d("CameraFragment", "Image capture scanned into media store: $uri")
                         Toast.makeText(
                             requireContext(),
-                            "Image capture scanned into media store: $uri",
+                            getString(R.string.image_saved),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
