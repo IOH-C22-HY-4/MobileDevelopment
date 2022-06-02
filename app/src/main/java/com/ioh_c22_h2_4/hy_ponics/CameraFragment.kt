@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.AspectRatio.RATIO_4_3
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -22,6 +23,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentCameraBinding
+import com.ioh_c22_h2_4.hy_ponics.util.Constants.FILENAME_FORMAT
+import com.ioh_c22_h2_4.hy_ponics.util.Constants.PHOTO_EXTENSION
 import com.ioh_c22_h2_4.hy_ponics.util.Util.createFile
 import java.io.File
 import java.util.concurrent.Executors
@@ -34,7 +37,7 @@ class CameraFragment : Fragment() {
 
     private var lensFacing = CameraSelector.LENS_FACING_BACK
 
-    private val permissions = listOf(Manifest.permission.CAMERA)
+    private val permissions = arrayOf(Manifest.permission.CAMERA)
 
     private val cameraExecutor by lazy { Executors.newSingleThreadExecutor() }
 
@@ -61,6 +64,19 @@ class CameraFragment : Fragment() {
             .build()
     }
 
+    private val launcherPermissionRequest =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.forEach {
+                val isGranted = it.value
+                if(isGranted){
+                    Log.d("$this", "permissions granted")
+                    bindCameraUseCases()
+                }else{
+                    Log.d("$this", "permissions denied")
+                }
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,6 +88,8 @@ class CameraFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        launcherPermissionRequest.launch(permissions)
 
         bindCameraUseCases()
 
@@ -86,7 +104,7 @@ class CameraFragment : Fragment() {
 
     private fun captureImage() {
         val outputDirectory = getOutputDirectory(requireContext())
-        val photoFile = createFile(outputDirectory, FILENAME, PHOTO_EXTENSION)
+        val photoFile = createFile(outputDirectory, FILENAME_FORMAT, PHOTO_EXTENSION)
         val metadata = ImageCapture.Metadata().apply {
             isReversedHorizontal = lensFacing == CameraSelector.LENS_FACING_FRONT
         }
@@ -121,11 +139,13 @@ class CameraFragment : Fragment() {
 
                 override fun onError(exception: ImageCaptureException) {
                     Log.d("CameraFragment", "photo captured failed: ${exception.message}")
-                    Toast.makeText(
-                        requireContext(),
-                        "photo captured failed: ${exception.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    context?.let {
+                        Toast.makeText(
+                            it,
+                            "photo captured failed: ${exception.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             })
     }
@@ -133,26 +153,11 @@ class CameraFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (!hasPermissions(requireContext())) {
-            requestPermissions(permissions.toTypedArray(), 10)
+            launcherPermissionRequest.launch(permissions)
         } else {
             bindCameraUseCases()
         }
     }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (PackageManager.PERMISSION_GRANTED == grantResults.firstOrNull()) {
-            Log.d("$this", "permissions granted")
-            bindCameraUseCases()
-        } else {
-            Log.d("$this", "permissions denied")
-        }
-    }
-
 
     private fun bindCameraUseCases() = binding.viewFinder.post {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
@@ -209,10 +214,5 @@ class CameraFragment : Fragment() {
             shutdown()
             awaitTermination(1000, TimeUnit.MILLISECONDS)
         }
-    }
-
-    companion object {
-        private const val FILENAME = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val PHOTO_EXTENSION = ".jpg"
     }
 }
