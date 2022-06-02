@@ -47,6 +47,20 @@ class CameraFragment : Fragment() {
             .build()
     }
 
+    private val preview by lazy {
+        val rotation = binding.viewFinder.display.rotation
+        Preview.Builder()
+            .setTargetAspectRatio(RATIO_4_3)
+            .setTargetRotation(rotation)
+            .build()
+    }
+
+    private val cameraSelector by lazy {
+        CameraSelector.Builder()
+            .requireLensFacing(lensFacing)
+            .build()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -145,15 +159,6 @@ class CameraFragment : Fragment() {
         cameraProviderFuture.addListener({
 
             val cameraProvider = cameraProviderFuture.get()
-
-            val cameraSelector = CameraSelector.Builder()
-                .requireLensFacing(lensFacing)
-                .build()
-
-            val preview = Preview.Builder()
-                .setTargetAspectRatio(RATIO_4_3)
-                .setTargetRotation(binding.viewFinder.display.rotation)
-                .build()
 
             cameraProvider.unbindAll()
             cameraProvider.bindToLifecycle(
