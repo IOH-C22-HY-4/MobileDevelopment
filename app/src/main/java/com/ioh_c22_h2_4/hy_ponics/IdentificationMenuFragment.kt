@@ -1,19 +1,30 @@
 package com.ioh_c22_h2_4.hy_ponics
 
 import android.app.Activity.RESULT_OK
+import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIdentificationMenuBinding
+import com.ioh_c22_h2_4.hy_ponics.util.Constants.FILENAME_FORMAT
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 class IdentificationMenuFragment : Fragment() {
 
@@ -23,6 +34,42 @@ class IdentificationMenuFragment : Fragment() {
     private lateinit var currentPhotoPath: String
 
     private var clicked: Boolean = false
+
+    private val launcherIntentGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            if (activityResult.resultCode == RESULT_OK) {
+                val uri = activityResult.data?.data as Uri
+                val photo = uri.uriToFile(requireContext())
+                Log.d("Identification", photo.absolutePath)
+                findNavController().navigate(
+                    IdentificationMenuFragmentDirections.actionIdentificationMenuFragmentToTanamanFragment(
+                        photo.absolutePath
+                    )
+                )
+            }
+        }
+
+    private fun Uri.uriToFile(context: Context): File {
+        val contentResolver: ContentResolver = context.contentResolver
+        val myFile = context.createTempFile()
+
+        val inputStream = contentResolver.openInputStream(this) as InputStream
+        val outputStream: OutputStream = FileOutputStream(myFile)
+        val buf = ByteArray(1024)
+        var len: Int
+        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
+        outputStream.close()
+        inputStream.close()
+
+        return myFile
+    }
+
+    private fun Context.createTempFile(): File {
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val timeStamp =
+            SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+        return File.createTempFile(timeStamp, ".jpg", storageDir)
+    }
 
     private val rotateOpen by lazy {
         AnimationUtils.loadAnimation(
@@ -37,14 +84,6 @@ class IdentificationMenuFragment : Fragment() {
             R.anim.rotate_close
         )
     }
-
-    private val launcherIntentGallery =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val uri = it.data?.data as Uri
-                val photo = uri.toFile()
-            }
-        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +108,7 @@ class IdentificationMenuFragment : Fragment() {
                     )
             }
             fabGallery.setOnClickListener {
-
+                startGallery()
             }
         }
     }
