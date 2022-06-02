@@ -1,23 +1,19 @@
 package com.ioh_c22_h2_4.hy_ponics
 
-import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.FileProvider
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIdentificationMenuBinding
-import com.ioh_c22_h2_4.hy_ponics.util.Util.createTempFile
-import java.io.File
 
 class IdentificationMenuFragment : Fragment() {
 
@@ -41,13 +37,6 @@ class IdentificationMenuFragment : Fragment() {
             R.anim.rotate_close
         )
     }
-
-    private val launcherIntentCamera =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val photo = File(currentPhotoPath)
-            }
-        }
 
     private val launcherIntentGallery =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -74,7 +63,10 @@ class IdentificationMenuFragment : Fragment() {
                 onAddButtonClicked()
             }
             fabCamera.setOnClickListener {
-                startCamera()
+                view.findNavController()
+                    .navigate(
+                        IdentificationMenuFragmentDirections.actionIdentificationMenuFragmentToCameraFragment()
+                    )
             }
             fabGallery.setOnClickListener {
 
@@ -107,25 +99,6 @@ class IdentificationMenuFragment : Fragment() {
             binding.btnAdd.startAnimation(rotateOpen)
         } else {
             binding.btnAdd.startAnimation(rotateClose)
-        }
-    }
-
-    @SuppressLint("QueryPermissionsNeeded")
-    private fun startCamera() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-            if (resolveActivity(requireActivity().packageManager) != null) {
-                requireActivity().applicationContext.createTempFile().also {
-                    val photoUri: Uri = FileProvider.getUriForFile(
-                        requireActivity(),
-                        "com.onirutla.storyapp",
-                        it
-                    )
-                    currentPhotoPath = it.absolutePath
-                    this.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-                }
-            }
-        }.also {
-            launcherIntentCamera.launch(it)
         }
     }
 
