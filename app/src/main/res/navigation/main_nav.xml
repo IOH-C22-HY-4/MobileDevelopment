@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_identificationMenuFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_identificationMenuFragment_to_tanamanFragment"
+            app:destination="@id/tanamanFragment" />
     </fragment>
     <fragment
         android:id="@+id/cameraFragment"
@@ -96,6 +99,9 @@
         <action
             android:id="@+id/action_tanamanFragment_to_identificationMenuFragment"
             app:destination="@id/identificationMenuFragment" />
+        <argument
+            android:name="path"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
