@@ -66,36 +66,13 @@ class CameraFragment : Fragment() {
 
     private var imageRotationDegrees: Int = 0
 
+    private val rotation by lazy { binding.viewFinder.display.rotation }
+
     private val imageCapture by lazy {
-        val rotation = binding.viewFinder.display.rotation
         ImageCapture.Builder()
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
             .setTargetAspectRatio(RATIO_4_3)
             .setTargetRotation(rotation)
-            .build()
-    }
-
-    private val imageAnalysis by lazy {
-        val rotation = binding.viewFinder.display.rotation
-        ImageAnalysis.Builder()
-            .setTargetAspectRatio(RATIO_4_3)
-            .setTargetRotation(rotation)
-            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
-            .build()
-    }
-
-    private val imagePreview by lazy {
-        val rotation = binding.viewFinder.display.rotation
-        Preview.Builder()
-            .setTargetAspectRatio(RATIO_4_3)
-            .setTargetRotation(rotation)
-            .build()
-    }
-
-    private val cameraSelector by lazy {
-        CameraSelector.Builder()
-            .requireLensFacing(lensFacing)
             .build()
     }
 
@@ -110,7 +87,7 @@ class CameraFragment : Fragment() {
     private val tfInputSize by lazy {
         val inputIndex = 0
         val inputShape = tflite.getInputTensor(inputIndex).shape()
-        Size(inputShape[2], inputShape[1]) // Order of axis is: {1, height, width, 3}
+        Size(inputShape[2], inputShape[1])
     }
 
     private val tfImageBuffer by lazy { TensorImage(DataType.FLOAT32) }
@@ -131,9 +108,6 @@ class CameraFragment : Fragment() {
             .build()
     }
 
-    private val tfImage by lazy {
-        tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
-    }
 
     private val lettuceDetector by lazy {
         LettuceDetectionHelper(
@@ -243,51 +217,47 @@ class CameraFragment : Fragment() {
 
             val cameraProvider = cameraProviderFuture.get()
 
-            cameraProvider.unbindAll()
-            cameraProvider.bindToLifecycle(
-                viewLifecycleOwner,
-                cameraSelector,
-                imagePreview,
-                imageCapture
-            )
+            val imageAnalysis = ImageAnalysis.Builder()
+                .setTargetAspectRatio(RATIO_4_3)
+                .setTargetRotation(rotation)
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+                .build()
+                .also {
+                    it.setAnalyzer(cameraExecutor) { image ->
+                        if (!::bitmapBuffer.isInitialized) {
+                            imageRotationDegrees = image.imageInfo.rotationDegrees
+                            bitmapBuffer = Bitmap.createBitmap(
+                                image.width,
+                                image.height,
+                                Bitmap.Config.ARGB_8888
+                            )
+                        }
 
-            var frameCounter = 0
-            var lastFpsTimestamp = System.currentTimeMillis()
+                        if (pauseAnalysis) {
+                            image.close()
+                            return@setAnalyzer
+                        }
 
-            imageAnalysis.setAnalyzer(cameraExecutor) { image ->
-                if (!::bitmapBuffer.isInitialized) {
-                    imageRotationDegrees = image.imageInfo.rotationDegrees
-                    bitmapBuffer = Bitmap.createBitmap(
-                        image.width,
-                        image.height,
-                        Bitmap.Config.ARGB_8888
-                    )
+                        image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
+                        val tfImage =
+                            tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
+
+                        val predictions = lettuceDetector.predict(tfImage)
+
+                        reportPrediction(predictions.maxByOrNull { it.score })
+                    }
                 }
 
-                if (pauseAnalysis) {
-                    image.close()
-                    return@setAnalyzer
-                }
+            val imagePreview = Preview.Builder()
+                .setTargetAspectRatio(RATIO_4_3)
+                .setTargetRotation(rotation)
+                .build()
 
-                image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
-                val predictions = lettuceDetector.predict(tfImage)
-
-                reportPrediction(predictions.maxByOrNull { it.score })
-
-                val frameCount = 10
-                if (++frameCounter % frameCount == 0){
-                    frameCounter = 0
-                    val now = System.currentTimeMillis()
-                    val delta = now - lastFpsTimestamp
-                    val fps = 1000 * frameCount.toFloat() / delta
-                    Log.d("CameraFragment", "FPS: ${"%.02f".format(fps)} with tensorSize: ${tfImage.width} x ${tfImage.height}")
-                    lastFpsTimestamp = now
-                }
-
-            }
-
-            imagePreview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+            val cameraSelector = CameraSelector.Builder()
+                .requireLensFacing(lensFacing)
+                .build()
 
             cameraProvider.unbindAll()
             cameraProvider.bindToLifecycle(
@@ -297,6 +267,8 @@ class CameraFragment : Fragment() {
                 imageCapture,
                 imageAnalysis
             )
+
+            imagePreview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
 
         }, ContextCompat.getMainExecutor(requireContext()))
     }
@@ -324,14 +296,12 @@ class CameraFragment : Fragment() {
             height = min(binding.viewFinder.height, location.bottom.toInt() - location.top.toInt())
         }
 
-        // Make sure all UI elements are visible
         binding.boxPrediction.visibility = View.VISIBLE
         binding.textPrediction.visibility = View.VISIBLE
     }
 
     private fun mapOutputCoordinates(location: RectF): RectF {
 
-        // Step 1: map location to the preview coordinates
         val previewLocation = RectF(
             location.left * binding.viewFinder.width,
             location.top * binding.viewFinder.height,
@@ -339,7 +309,6 @@ class CameraFragment : Fragment() {
             location.bottom * binding.viewFinder.height
         )
 
-        // Step 2: compensate for camera sensor orientation and mirroring
         val isFrontFacing = lensFacing == CameraSelector.LENS_FACING_FRONT
         val correctedLocation = if (isFrontFacing) {
             RectF(
@@ -352,7 +321,6 @@ class CameraFragment : Fragment() {
             previewLocation
         }
 
-        // Step 3: compensate for 1:1 to 4:3 aspect ratio conversion + small margin
         val margin = 0.1f
         val requestedRatio = 4f / 3f
         val midX = (correctedLocation.left + correctedLocation.right) / 2f
@@ -389,7 +357,7 @@ class CameraFragment : Fragment() {
 
     private fun getOutputDirectory(context: Context): File {
         val appContext = context.applicationContext
-        val mediaDir = context.                                                     externalMediaDirs.firstOrNull()?.let {
+        val mediaDir = context.externalMediaDirs.firstOrNull()?.let {
             File(it, appContext.resources.getString(R.string.app_name)).apply { mkdirs() }
         }
         return if (mediaDir != null && mediaDir.exists())

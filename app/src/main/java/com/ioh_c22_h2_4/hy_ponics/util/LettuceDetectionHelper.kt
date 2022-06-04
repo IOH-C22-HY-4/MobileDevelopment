@@ -27,7 +27,7 @@ class LettuceDetectionHelper(private val tflite: Interpreter, private val labels
                     RectF(it[1], it[0], it[3], it[2])
                 },
 
-                label = labels[1 + labelIndices[0][objectCount].toInt()],
+                label = labels[0 + labelIndices[0][objectCount].toInt()],
                 score = scores[0][objectCount]
             )
         }

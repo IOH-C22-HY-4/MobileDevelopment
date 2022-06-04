@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".CameraFragment">
 
+    <ImageView
+        android:id="@+id/image_predicted"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
