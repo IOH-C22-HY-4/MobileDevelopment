@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentPlantBinding
-import com.ioh_c22_h2_4.hy_ponics.ml.Lettuceclass03V4Best
+import com.ioh_c22_h2_4.hy_ponics.ml.Lettuceclass03V4
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -52,7 +52,7 @@ class PlantFragment : Fragment() {
     }
 
     private fun analyze(bitmap: Bitmap) {
-        val model = Lettuceclass03V4Best.newInstance(requireContext())
+        val model = Lettuceclass03V4.newInstance(requireContext())
 
         val scaledBitmap = bitmap.scale(
             150,
@@ -65,8 +65,8 @@ class PlantFragment : Fragment() {
 
         val tensorImage = TensorImage(DataType.FLOAT32).apply { load(scaledBitmap) }
         val byteBuffer = ByteBuffer.allocateDirect(150 * 150 * 3 * 4).apply {
-            put(tensorImage.buffer)
             order(ByteOrder.nativeOrder())
+            put(tensorImage.buffer)
         }
 
         val input = TensorBuffer.createFixedSize(intArrayOf(1, 150, 150, 3), DataType.FLOAT32)
@@ -86,6 +86,7 @@ class PlantFragment : Fragment() {
                 index = i
             }
         }
+        Log.d("fragment", "maxvalue: $maxValue, index: $index")
 
         val lettuceResult = when (index) {
             0 -> "Selada Butterhead"
@@ -97,6 +98,7 @@ class PlantFragment : Fragment() {
             else -> "Unknown"
         }
 
+        Log.d("fragment", lettuceResult)
         binding.tvPlantName.text = lettuceResult
 
         model.close()
