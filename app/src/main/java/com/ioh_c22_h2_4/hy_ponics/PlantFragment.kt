@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentPlantBinding
-import com.ioh_c22_h2_4.hy_ponics.ml.Model
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -52,7 +51,7 @@ class PlantFragment : Fragment() {
     }
 
     private fun analyze(bitmap: Bitmap) {
-        val model = Model.newInstance(requireContext())
+//        val model = Model.newInstance(requireContext())
 
         val scaledBitmap = bitmap.scale(
             150,
@@ -77,36 +76,36 @@ class PlantFragment : Fragment() {
                 loadBuffer(byteBuffer)
             }
 
-        val outputs = model.process(input)
-        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-
-        var maxValue = 0.0
-        var index = 0
-        for (i in outputFeature0.floatArray.indices) {
-            Log.d("analyze", "${outputFeature0.floatArray[i].toDouble()}")
-            if (maxValue < outputFeature0.floatArray[i]) {
-                maxValue = outputFeature0.floatArray[i].toDouble()
-                index = i
-            }
-        }
-        Log.d("analyze", "maxvalue: $maxValue, index: $index")
-
-
-        val labels = listOf(
-            "Selada Butterhead",
-            "Selada Green Romaine",
-            "Selada Hijau new grand rapids",
-            "Selada Keriting oakleaf green",
-            "Selada Merah red Rapids",
-            "Selada Red Romaine"
-        )
-
-        val lettuceResult = labels[index]
-
-        Log.d("fragment", lettuceResult)
-        binding.tvPlantName.text = lettuceResult
-
-        model.close()
+//        val outputs = model.process(input)
+//        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+//
+//        var maxValue = 0.0
+//        var index = 0
+//        for (i in outputFeature0.floatArray.indices) {
+//            Log.d("analyze", "${outputFeature0.floatArray[i].toDouble()}")
+//            if (maxValue < outputFeature0.floatArray[i]) {
+//                maxValue = outputFeature0.floatArray[i].toDouble()
+//                index = i
+//            }
+//        }
+//        Log.d("analyze", "maxvalue: $maxValue, index: $index")
+//
+//
+//        val labels = listOf(
+//            "Selada Butterhead",
+//            "Selada Green Romaine",
+//            "Selada Hijau new grand rapids",
+//            "Selada Keriting oakleaf green",
+//            "Selada Merah red Rapids",
+//            "Selada Red Romaine"
+//        )
+//
+//        val lettuceResult = labels[index]
+//
+//        Log.d("fragment", lettuceResult)
+//        binding.tvPlantName.text = lettuceResult
+//
+//        model.close()
     }
 
     override fun onDestroyView() {
