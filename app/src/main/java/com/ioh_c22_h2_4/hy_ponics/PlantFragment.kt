@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentPlantBinding
-import com.ioh_c22_h2_4.hy_ponics.ml.Lettuceclass03V4
+import com.ioh_c22_h2_4.hy_ponics.ml.Model
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -52,7 +52,7 @@ class PlantFragment : Fragment() {
     }
 
     private fun analyze(bitmap: Bitmap) {
-        val model = Lettuceclass03V4.newInstance(requireContext())
+        val model = Model.newInstance(requireContext())
 
         val scaledBitmap = bitmap.scale(
             150,
@@ -63,10 +63,13 @@ class PlantFragment : Fragment() {
             true
         )
 
+        binding.scaled.setImageBitmap(scaledBitmap)
+
         val tensorImage = TensorImage(DataType.FLOAT32).apply { load(scaledBitmap) }
         val byteBuffer = ByteBuffer.allocateDirect(150 * 150 * 3 * 4).apply {
             order(ByteOrder.nativeOrder())
             put(tensorImage.buffer)
+            rewind()
         }
 
         val input = TensorBuffer.createFixedSize(intArrayOf(1, 150, 150, 3), DataType.FLOAT32)
@@ -80,23 +83,25 @@ class PlantFragment : Fragment() {
         var maxValue = 0.0
         var index = 0
         for (i in outputFeature0.floatArray.indices) {
-            Log.d("fragment", "${outputFeature0.floatArray[i].toDouble()}")
+            Log.d("analyze", "${outputFeature0.floatArray[i].toDouble()}")
             if (maxValue < outputFeature0.floatArray[i]) {
                 maxValue = outputFeature0.floatArray[i].toDouble()
                 index = i
             }
         }
-        Log.d("fragment", "maxvalue: $maxValue, index: $index")
+        Log.d("analyze", "maxvalue: $maxValue, index: $index")
 
-        val lettuceResult = when (index) {
-            0 -> "Selada Butterhead"
-            1 -> "Selada Green Romaine"
-            2 -> "Selada Hijau new grand rapids"
-            3 -> "Selada Keriting oakleaf green"
-            4 -> "Selada Merah red Rapids"
-            5 -> "Selada Red Romaine"
-            else -> "Unknown"
-        }
+
+        val labels = listOf(
+            "Selada Butterhead",
+            "Selada Green Romaine",
+            "Selada Hijau new grand rapids",
+            "Selada Keriting oakleaf green",
+            "Selada Merah red Rapids",
+            "Selada Red Romaine"
+        )
+
+        val lettuceResult = labels[index]
 
         Log.d("fragment", lettuceResult)
         binding.tvPlantName.text = lettuceResult
