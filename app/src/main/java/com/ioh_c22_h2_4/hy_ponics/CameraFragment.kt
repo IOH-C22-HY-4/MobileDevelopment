@@ -29,7 +29,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentCameraBinding
-import com.ioh_c22_h2_4.hy_ponics.util.Constants.ACCURACY_THRESHOLD
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.FILENAME_FORMAT
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.LABELS_PATH
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.MODEL_PATH
@@ -90,7 +89,7 @@ class CameraFragment : Fragment() {
     private val tfInputSize by lazy {
         val inputIndex = 0
         val inputShape = tflite.getInputTensor(inputIndex).shape()
-        Size(inputShape[2], inputShape[1]) // Order of axis is: {1, height, width, 3}
+        Size(inputShape[2], inputShape[1])
     }
 
     private val tfImageBuffer = TensorImage(DataType.FLOAT32)
