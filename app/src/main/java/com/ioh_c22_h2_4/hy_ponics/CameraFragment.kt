@@ -33,6 +33,7 @@ import com.ioh_c22_h2_4.hy_ponics.util.Constants.FILENAME_FORMAT
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.LABELS_PATH
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.MODEL_PATH
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.PHOTO_EXTENSION
+import com.ioh_c22_h2_4.hy_ponics.util.ObjectDetectionHelper
 import com.ioh_c22_h2_4.hy_ponics.util.Util.createFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,8 +48,6 @@ import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp
 import org.tensorflow.lite.support.image.ops.Rot90Op
 import java.io.File
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -307,40 +306,6 @@ class CameraFragment : Fragment() {
         }
         return if (mediaDir != null && mediaDir.exists())
             mediaDir else appContext.filesDir
-    }
-
-    class ObjectDetectionHelper(private val tflite: Interpreter, private val labels: List<String>) {
-
-        /** Abstraction object that wraps a prediction output in an easy to parse way */
-        data class ObjectPrediction(val label: String, val score: Float)
-
-        private val scores = arrayOf(FloatArray(OBJECT_COUNT))
-
-        val predictions
-            get() = (0 until OBJECT_COUNT).map {
-                ObjectPrediction(
-                    // SSD Mobilenet V1 Model assumes class 0 is background class
-                    // in label file and class labels start from 1 to number_of_classes + 1,
-                    // while outputClasses correspond to class index from 0 to number_of_classes
-                    label = labels[it],
-
-                    // Score is a single value of [0, 1]
-                    score = scores[0][it]
-                )
-            }
-
-        fun predict(image: TensorImage): List<ObjectPrediction> {
-            val byteBuffer = ByteBuffer.allocateDirect(150 * 150 * 3 * 4).apply {
-                order(ByteOrder.nativeOrder())
-                put(image.buffer)
-            }
-            tflite.run(byteBuffer, scores)
-            return predictions
-        }
-
-        companion object {
-            const val OBJECT_COUNT = 6
-        }
     }
 
 }
