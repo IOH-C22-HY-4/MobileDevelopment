@@ -262,7 +262,10 @@ class CameraFragment : Fragment() {
 
                 val tfImage = tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
 
-                val prediction = detector.predict(tfImage)
+                val prediction = detector.predict(tfImage).maxByOrNull { it.score }
+                if (prediction != null) {
+                    reportPrediction(prediction)
+                }
                 Log.d("CameraFragment", "$prediction")
             }
 
@@ -285,6 +288,11 @@ class CameraFragment : Fragment() {
 
         }, ContextCompat.getMainExecutor(requireContext()))
     }
+
+    private fun reportPrediction(prediction: ObjectDetectionHelper.ObjectPrediction) =
+        binding.viewFinder.post {
+            binding.textPrediction.text = prediction.label
+        }
 
 
     private fun setCameraFacing() {
