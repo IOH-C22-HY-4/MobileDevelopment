@@ -7,4 +7,5 @@ object Constants {
     const val MODEL_PATH = "model.tflite"
     const val LABELS_PATH = "model.txt"
     const val ACCURACY_THRESHOLD = 0.5f
+    const val IMAGE_INPUT_SIZE=150
 }
