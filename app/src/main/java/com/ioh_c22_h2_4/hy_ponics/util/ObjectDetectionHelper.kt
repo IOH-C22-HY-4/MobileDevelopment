@@ -1,7 +1,5 @@
 package com.ioh_c22_h2_4.hy_ponics.util
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.image.TensorImage
 import java.nio.ByteBuffer
