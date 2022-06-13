@@ -34,6 +34,7 @@ import com.ioh_c22_h2_4.hy_ponics.util.Constants.LABELS_PATH
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.MODEL_PATH
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.PHOTO_EXTENSION
 import com.ioh_c22_h2_4.hy_ponics.util.ObjectDetectionHelper
+import com.ioh_c22_h2_4.hy_ponics.util.PredictionResult
 import com.ioh_c22_h2_4.hy_ponics.util.Util.createFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -85,6 +86,8 @@ class CameraFragment : Fragment() {
         )
     }
 
+    private lateinit var predictionResult: PredictionResult
+
     private val tfInputSize by lazy {
         val inputIndex = 0
         val inputShape = tflite.getInputTensor(inputIndex).shape()
@@ -110,7 +113,7 @@ class CameraFragment : Fragment() {
                 )
             )
             .add(Rot90Op(-imageRotationDegrees / 90))
-            .add(NormalizeOp(0f, 1f))
+            .add(NormalizeOp(0f, 255f))
             .build()
 
     }
@@ -165,7 +168,6 @@ class CameraFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        _binding = null
 
         cameraExecutor.apply {
             shutdown()
@@ -176,6 +178,7 @@ class CameraFragment : Fragment() {
         nnApiDelegate.close()
 
         super.onDestroyView()
+        _binding = null
     }
 
     private fun captureImage() {
@@ -212,7 +215,10 @@ class CameraFragment : Fragment() {
                         ).show()
                         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                             sharedViewModel.setUri(uri)
-                            findNavController().navigate(CameraFragmentDirections.actionCameraFragmentToTanamanFragment())
+                            if (::predictionResult.isInitialized && predictionResult != null) {
+                                sharedViewModel.setPredictionResult(predictionResult)
+                                findNavController().navigate(CameraFragmentDirections.actionCameraFragmentToTanamanFragment())
+                            }
                         }
                     }
                 }
@@ -262,8 +268,11 @@ class CameraFragment : Fragment() {
 
                 val tfImage = tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
 
-                val prediction = detector.predict(tfImage).maxByOrNull { it.score }
-                Log.d("CameraFragment", "$prediction")
+                predictionResult = detector.predict(tfImage).maxByOrNull { it.score }
+                    ?: PredictionResult("", 0f)
+
+                reportPrediction(predictionResult)
+                Log.d("CameraFragment", "$predictionResult")
             }
 
 
@@ -285,6 +294,12 @@ class CameraFragment : Fragment() {
 
         }, ContextCompat.getMainExecutor(requireContext()))
     }
+
+    private fun reportPrediction(prediction: PredictionResult) =
+        binding.viewFinder.post {
+            binding.textPrediction.text = prediction.label
+        }
+
 
     private fun setCameraFacing() {
         lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK)
