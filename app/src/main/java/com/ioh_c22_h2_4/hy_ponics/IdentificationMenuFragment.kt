@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIdentificationMenuBinding
@@ -22,6 +23,8 @@ class IdentificationMenuFragment : Fragment() {
     private var _binding: FragmentIdentificationMenuBinding? = null
     private val binding get() = _binding!!
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     private var clicked: Boolean = false
 
     private val launcherIntentGallery =
@@ -30,11 +33,8 @@ class IdentificationMenuFragment : Fragment() {
                 val uri = activityResult.data?.data as Uri
                 val photo = uri.uriToFile(requireContext())
                 Log.d("Identification", photo.absolutePath)
-                findNavController().navigate(
-                    IdentificationMenuFragmentDirections.actionIdentificationMenuFragmentToTanamanFragment(
-                        photo.absolutePath
-                    )
-                )
+                sharedViewModel.setUri(uri)
+                findNavController().navigate(IdentificationMenuFragmentDirections.actionIdentificationMenuFragmentToTanamanFragment())
             }
         }
 

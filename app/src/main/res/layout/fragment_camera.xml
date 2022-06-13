@@ -7,6 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".CameraFragment">
 
+    <TextView
+        android:id="@+id/textPrediction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        android:textAllCaps="true"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="?attr/colorSurface"
+        android:textAlignment="center"
+        tools:text="Selada"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_predicted"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
@@ -34,6 +56,14 @@
         app:layout_constraintEnd_toEndOf="@+id/viewFinder"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_switch_camera" />
+
+    <View
+        android:id="@+id/box_prediction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_rectangle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVertical"

@@ -78,4 +78,5 @@ detect plant diseases, forecast the weather, and predict the sunspot.</string>
     <string name="content_description_gallery">Take Image From Gallery</string>
     <string name="content_description_camera">Take Image From Camera</string>
     <string name="image_saved">Image Saved</string>
+    <string name="unknown">Unknown</string>
 </resources>
