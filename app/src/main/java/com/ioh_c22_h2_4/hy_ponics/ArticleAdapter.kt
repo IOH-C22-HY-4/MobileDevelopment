@@ -2,6 +2,7 @@ package com.ioh_c22_h2_4.hy_ponics
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ioh_c22_h2_4.hy_ponics.databinding.ItemArticleBinding
@@ -27,17 +28,16 @@ class ArticleAdapter(private val articleList: ArrayList<Article>) :
                 .into(binding.articleImage)
             binding.articleTitle.text = data.title
 
-//            binding.root.setOnClickListener {
-//                val article = Article(
-//                    data.title,
-//                    data.img,
-//                    data.content
-//                )
-
-//                val intent = Intent(binding.root.context, DetailArticleFragment::class.java)
-//                intent.putExtra(DetailArticleFragment.DETAIL_ARTICLE, article)
-//                binding.root.context.startActivity(intent)
-//            }
+            binding.root.setOnClickListener {
+                val article = Article(
+                    data.title,
+                    data.content,
+                    data.img
+                )
+                it.findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDetailArticleFragment(article)
+                )
+            }
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.*
@@ -35,13 +36,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = binding.rvPopularArticle
-        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        recyclerView.layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL, false)
         recyclerView.setHasFixedSize(true)
 
         articleArrayList = arrayListOf()
 
         articleAdapter = ArticleAdapter(articleArrayList)
         recyclerView.adapter = articleAdapter
+
+        binding.rvPopularArticle.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_detailArticleFragment)
+        }
         EventChangeListener()
     }
 

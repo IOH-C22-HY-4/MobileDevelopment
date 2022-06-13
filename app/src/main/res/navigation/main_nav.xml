@@ -21,8 +21,10 @@
         tools:layout="@layout/fragment_detail_article">
         <argument
             android:name="idArticle"
-            android:defaultValue="0"
-            app:argType="integer" />
+            app:argType="com.ioh_c22_h2_4.hy_ponics.Article" />
+        <action
+            android:id="@+id/action_detailArticleFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/identificationMenuFragment"
