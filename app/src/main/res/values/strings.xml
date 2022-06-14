@@ -55,6 +55,7 @@
     <string name="humidity">Humidity</string>
     <string name="clouds">Clouds</string>
     <string name="hint_search">Search article</string>
+    <string name="hyponics_article">Hyponics Article</string>
     <string name="popular_article">Popular Article</string>
     <string name="other_article">Other Article</string>
     <string name="home">Home</string>
