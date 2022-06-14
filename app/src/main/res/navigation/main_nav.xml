@@ -101,9 +101,6 @@
         <action
             android:id="@+id/action_tanamanFragment_to_identificationMenuFragment"
             app:destination="@id/identificationMenuFragment" />
-        <argument
-            android:name="path"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"

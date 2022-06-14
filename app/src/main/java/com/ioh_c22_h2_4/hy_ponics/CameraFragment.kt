@@ -3,10 +3,12 @@ package com.ioh_c22_h2_4.hy_ponics
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.AspectRatio.RATIO_4_3
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
@@ -22,10 +25,29 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentCameraBinding
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.FILENAME_FORMAT
+import com.ioh_c22_h2_4.hy_ponics.util.Constants.LABELS_PATH
+import com.ioh_c22_h2_4.hy_ponics.util.Constants.MODEL_PATH
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.PHOTO_EXTENSION
+import com.ioh_c22_h2_4.hy_ponics.util.ObjectDetectionHelper
+import com.ioh_c22_h2_4.hy_ponics.util.PredictionResult
 import com.ioh_c22_h2_4.hy_ponics.util.Util.createFile
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.nnapi.NnApiDelegate
+import org.tensorflow.lite.support.common.FileUtil
+import org.tensorflow.lite.support.common.ops.NormalizeOp
+import org.tensorflow.lite.support.image.ImageProcessor
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.image.ops.ResizeOp
+import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp
+import org.tensorflow.lite.support.image.ops.Rot90Op
 import java.io.File
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -35,14 +57,19 @@ class CameraFragment : Fragment() {
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     private var lensFacing = CameraSelector.LENS_FACING_BACK
 
-    private val permissions = arrayOf(Manifest.permission.CAMERA)
+    private var imageRotationDegrees: Int = 0
 
-    private val cameraExecutor by lazy { Executors.newSingleThreadExecutor() }
+    private val permissions by lazy { arrayOf(Manifest.permission.CAMERA) }
+
+    private val rotation by lazy { binding.viewFinder.display.rotation }
+
+    private lateinit var bitmapBuffer: Bitmap
 
     private val imageCapture by lazy {
-        val rotation = binding.viewFinder.display.rotation
         ImageCapture.Builder()
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
             .setTargetAspectRatio(RATIO_4_3)
@@ -50,28 +77,57 @@ class CameraFragment : Fragment() {
             .build()
     }
 
-    private val preview by lazy {
-        val rotation = binding.viewFinder.display.rotation
-        Preview.Builder()
-            .setTargetAspectRatio(RATIO_4_3)
-            .setTargetRotation(rotation)
-            .build()
+    private val nnApiDelegate by lazy { NnApiDelegate() }
+
+    private val tflite by lazy {
+        Interpreter(
+            FileUtil.loadMappedFile(requireContext(), MODEL_PATH),
+            Interpreter.Options().addDelegate(nnApiDelegate)
+        )
     }
 
-    private val cameraSelector by lazy {
-        CameraSelector.Builder()
-            .requireLensFacing(lensFacing)
-            .build()
+    private lateinit var predictionResult: PredictionResult
+
+    private val tfInputSize by lazy {
+        val inputIndex = 0
+        val inputShape = tflite.getInputTensor(inputIndex).shape()
+        Size(inputShape[2], inputShape[1])
     }
+
+    private val tfImageBuffer = TensorImage(DataType.FLOAT32)
+
+    private val detector by lazy {
+        ObjectDetectionHelper(
+            tflite,
+            FileUtil.loadLabels(requireContext(), LABELS_PATH)
+        )
+    }
+
+    private val tfImageProcessor by lazy {
+        val cropSize = minOf(bitmapBuffer.width, bitmapBuffer.height)
+        ImageProcessor.Builder()
+            .add(ResizeWithCropOrPadOp(cropSize, cropSize))
+            .add(
+                ResizeOp(
+                    tfInputSize.height, tfInputSize.width, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR
+                )
+            )
+            .add(Rot90Op(-imageRotationDegrees / 90))
+            .add(NormalizeOp(0f, 255f))
+            .build()
+
+    }
+
+    private val cameraExecutor by lazy { Executors.newSingleThreadExecutor() }
 
     private val launcherPermissionRequest =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.forEach {
                 val isGranted = it.value
-                if(isGranted){
+                if (isGranted) {
                     Log.d("$this", "permissions granted")
                     bindCameraUseCases()
-                }else{
+                } else {
                     Log.d("$this", "permissions denied")
                 }
             }
@@ -100,6 +156,29 @@ class CameraFragment : Fragment() {
         binding.captureImage.setOnClickListener {
             captureImage()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!hasPermissions(requireContext())) {
+            launcherPermissionRequest.launch(permissions)
+        } else {
+            bindCameraUseCases()
+        }
+    }
+
+    override fun onDestroyView() {
+
+        cameraExecutor.apply {
+            shutdown()
+            awaitTermination(1000, TimeUnit.MILLISECONDS)
+        }
+
+        tflite.close()
+        nnApiDelegate.close()
+
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun captureImage() {
@@ -134,6 +213,13 @@ class CameraFragment : Fragment() {
                             getString(R.string.image_saved),
                             Toast.LENGTH_SHORT
                         ).show()
+                        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                            sharedViewModel.setUri(uri)
+                            if (::predictionResult.isInitialized && predictionResult != null) {
+                                sharedViewModel.setPredictionResult(predictionResult)
+                                findNavController().navigate(CameraFragmentDirections.actionCameraFragmentToTanamanFragment())
+                            }
+                        }
                     }
                 }
 
@@ -150,41 +236,70 @@ class CameraFragment : Fragment() {
             })
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (!hasPermissions(requireContext())) {
-            launcherPermissionRequest.launch(permissions)
-        } else {
-            bindCameraUseCases()
-        }
-    }
-
     private fun bindCameraUseCases() = binding.viewFinder.post {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
 
             val cameraProvider = cameraProviderFuture.get()
 
+            val imagePreview = Preview.Builder()
+                .setTargetAspectRatio(RATIO_4_3)
+                .setTargetRotation(rotation)
+                .build()
+
+            val imageAnalysis = ImageAnalysis.Builder()
+                .setTargetAspectRatio(RATIO_4_3)
+                .setTargetRotation(rotation)
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+                .build()
+
+            imageAnalysis.setAnalyzer(cameraExecutor) { image ->
+                if (!::bitmapBuffer.isInitialized) {
+                    imageRotationDegrees = image.imageInfo.rotationDegrees
+                    bitmapBuffer = Bitmap.createBitmap(
+                        image.width,
+                        image.height,
+                        Bitmap.Config.ARGB_8888
+                    )
+                }
+
+                image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
+
+                val tfImage = tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
+
+                predictionResult = detector.predict(tfImage).maxByOrNull { it.score }
+                    ?: PredictionResult("", 0f)
+
+                reportPrediction(predictionResult)
+                Log.d("CameraFragment", "$predictionResult")
+            }
+
+
+            val cameraSelector = CameraSelector.Builder()
+                .requireLensFacing(lensFacing)
+                .build()
+
             cameraProvider.unbindAll()
             cameraProvider.bindToLifecycle(
                 viewLifecycleOwner,
                 cameraSelector,
-                preview,
-                imageCapture
+                imagePreview,
+                imageCapture,
+                imageAnalysis
             )
 
-            preview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
 
-            cameraProvider.unbindAll()
-            cameraProvider.bindToLifecycle(
-                viewLifecycleOwner,
-                cameraSelector,
-                preview,
-                imageCapture
-            )
+            imagePreview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
 
         }, ContextCompat.getMainExecutor(requireContext()))
     }
+
+    private fun reportPrediction(prediction: PredictionResult) =
+        binding.viewFinder.post {
+            binding.textPrediction.text = prediction.label
+        }
+
 
     private fun setCameraFacing() {
         lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK)
@@ -207,12 +322,4 @@ class CameraFragment : Fragment() {
             mediaDir else appContext.filesDir
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        cameraExecutor.apply {
-            shutdown()
-            awaitTermination(1000, TimeUnit.MILLISECONDS)
-        }
-    }
 }
