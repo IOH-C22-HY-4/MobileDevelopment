@@ -6,6 +6,7 @@ buildscript {
 
     dependencies {
         classpath "androidx.navigation.safeargs.kotlin:androidx.navigation.safeargs.kotlin.gradle.plugin:$nav_version"
+        classpath 'com.google.gms:google-services:4.3.10'
     }
 }
 

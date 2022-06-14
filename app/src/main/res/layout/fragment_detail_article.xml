@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailArticleFragment">
-
+    tools:context=".DetailArticleFragment"
+    tools:ignore="ScrollViewCount">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontal2"
@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/iv_article_image"
-        android:layout_width="410dp"
-        android:layout_height="556dp"
+        android:layout_width="426dp"
+        android:layout_height="284dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/article_image"
         android:scaleType="centerCrop"
@@ -43,6 +43,7 @@
         android:layout_width="42dp"
         android:layout_height="46dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/backbutton"
         android:src="@drawable/back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
@@ -50,42 +51,48 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/back" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="409dp"
-        android:layout_height="461dp"
-        android:layout_marginTop="252dp"
-        android:background="@drawable/white_banner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_article_image">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/tv_titleArticle"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:fontFamily="@font/bold"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="20dp"
+            android:layout_marginTop="252dp"
+            android:background="@drawable/white_banner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/titleArt" />
+            app:layout_constraintTop_toTopOf="@+id/iv_article_image">
 
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="414dp"
-            android:layout_height="387dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/regular"
-            android:textColor="?attr/colorOnSurface"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titleArticle"
-            tools:text="@string/description" />
+            <TextView
+                android:id="@+id/tv_titleArticle"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/titleArt" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+            <me.biubiubiu.justifytext.library.JustifyTextView
+                android:id="@+id/tv_description"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:fontFamily="@font/regular"
+                android:gravity="center_vertical"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintEnd_toEndOf="@+id/tv_titleArticle"
+                app:layout_constraintStart_toStartOf="@+id/tv_titleArticle"
+                app:layout_constraintTop_toBottomOf="@+id/tv_titleArticle"
+                tools:text="@string/description" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
