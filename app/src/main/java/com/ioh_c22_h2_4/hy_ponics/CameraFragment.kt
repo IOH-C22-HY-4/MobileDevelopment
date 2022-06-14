@@ -271,7 +271,6 @@ class CameraFragment : Fragment() {
                 predictionResult = detector.predict(tfImage).maxByOrNull { it.score }
                     ?: PredictionResult("", 0f)
 
-                reportPrediction(predictionResult)
                 Log.d("CameraFragment", "$predictionResult")
             }
 
@@ -289,17 +288,10 @@ class CameraFragment : Fragment() {
                 imageAnalysis
             )
 
-
             imagePreview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
 
         }, ContextCompat.getMainExecutor(requireContext()))
     }
-
-    private fun reportPrediction(prediction: PredictionResult) =
-        binding.viewFinder.post {
-            binding.textPrediction.text = prediction.label
-        }
-
 
     private fun setCameraFacing() {
         lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK)
