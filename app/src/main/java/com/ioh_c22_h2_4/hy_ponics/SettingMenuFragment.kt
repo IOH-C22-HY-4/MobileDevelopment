@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentSettingMenuBinding
+import com.ioh_c22_h2_4.hy_ponics.util.Util.logout
 
 class SettingMenuFragment : Fragment() {
 
@@ -22,8 +25,22 @@ class SettingMenuFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding.btnSignOut.setOnClickListener {
+            context?.let {
+                AlertDialog.Builder(it).apply {
+                    setTitle("Are you sure?")
+                    setPositiveButton("Yes") { _, _ ->
 
+                        FirebaseAuth.getInstance().signOut()
+                        context.logout()
+
+                    }
+                    setNegativeButton("Cancel") { _, _ ->
+                    }
+                }.create().show()
+            }
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {

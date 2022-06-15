@@ -5,12 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIotBinding
+import java.lang.Exception
 
 class IOTFragment : Fragment() {
 
     private var _binding: FragmentIotBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth : FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +34,46 @@ class IOTFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = FirebaseAuth.getInstance()
+        loadUserInfo()
+
+        binding.btnEditProfile.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_IOTFragment_to_detailProfileFragment)
+        }
+
+        binding.settings.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_IOTFragment_to_settingMenuFragment)
+        }
+
+    }
+
+    private fun loadUserInfo() {
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(auth.uid!!)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val email = "${snapshot.child("email").value}"
+                    val username = "${snapshot.child("username").value}"
+                    val profileImage = "${snapshot.child("profileImage").value}"
+                    val uid = "${snapshot.child("uid").value}"
+
+
+
+                    try {
+                        Glide.with(this@IOTFragment)
+                            .load(profileImage)
+                            .placeholder(R.drawable.img_1)
+                            .into(binding.imgProfile)
+                        binding.tvName.text = username
+                    }
+                    catch (e: Exception){}
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
     }
 
     override fun onDestroyView() {
