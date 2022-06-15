@@ -12,6 +12,6 @@ class IOTViewModel @Inject constructor(
     private val iotRepository: IOTRepository
 ) : ViewModel() {
 
-    val sensor = iotRepository.getSensorData().asLiveData(viewModelScope.coroutineContext)
+    val sensorData = iotRepository.getSensorData().asLiveData(viewModelScope.coroutineContext)
 
 }

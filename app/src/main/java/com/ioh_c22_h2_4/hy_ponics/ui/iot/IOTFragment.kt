@@ -24,6 +24,8 @@ class IOTFragment : Fragment() {
     private var _binding: FragmentIotBinding? = null
     private val binding get() = _binding!!
 
+    private val parameterAdapter by lazy { ParameterAdapter() }
+
     private val viewModel: IOTViewModel by viewModels()
 
     private lateinit var auth : FirebaseAuth
@@ -40,8 +42,14 @@ class IOTFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.sensor.observe(viewLifecycleOwner) {
+        viewModel.sensorData.observe(viewLifecycleOwner) {
             Log.d(this.javaClass.simpleName, "$it")
+            parameterAdapter.submitList(it)
+        }
+
+        binding.rvParameter.apply {
+            adapter = parameterAdapter
+            setHasFixedSize(true)
         }
         auth = FirebaseAuth.getInstance()
         loadUserInfo()
