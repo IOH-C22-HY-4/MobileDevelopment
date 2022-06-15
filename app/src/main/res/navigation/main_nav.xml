@@ -61,18 +61,15 @@
         <action
             android:id="@+id/action_IOTFragment_to_notificationMenuFragment"
             app:destination="@id/notificationMenuFragment" />
-        <argument
-            android:name="idUser"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/detailProfileFragment"
         android:name="com.ioh_c22_h2_4.hy_ponics.DetailProfileFragment"
         android:label="fragment_detail_profile"
         tools:layout="@layout/fragment_detail_profile">
-        <argument
-            android:name="idUser"
-            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailProfileFragment_to_IOTFragment"
+            app:destination="@id/IOTFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingMenuFragment"
