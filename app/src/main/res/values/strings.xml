@@ -87,4 +87,5 @@ detect plant diseases, forecast the weather, and predict the sunspot.</string>
     <string name="enterPas">Please Enter Your Password</string>
     <string name="enterName">Please Enter Your Username</string>
     <string name="pasMust6">Password must at least 6 character</string>
+    <string name="setting">Settings</string>
 </resources>

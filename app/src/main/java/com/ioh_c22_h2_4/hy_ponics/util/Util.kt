@@ -2,8 +2,10 @@ package com.ioh_c22_h2_4.hy_ponics.util
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Environment
+import com.ioh_c22_h2_4.hy_ponics.LoginActivity
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.FILENAME_FORMAT
 import java.io.File
 import java.io.FileOutputStream
@@ -44,5 +46,12 @@ object Util {
         val timeStamp =
             SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
         return File.createTempFile(timeStamp, ".jpg", storageDir)
+    }
+
+    fun Context.logout() {
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
     }
 }
