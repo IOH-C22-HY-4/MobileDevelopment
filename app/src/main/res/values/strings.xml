@@ -56,6 +56,7 @@
     <string name="clouds">Clouds</string>
     <string name="hint_search">Search article</string>
     <string name="hyponics_article">Hyponics Article</string>
+    <string name="popular_article">Popular Article</string>
     <string name="other_article">Other Article</string>
     <string name="home">Home</string>
     <string name="identification">Identification</string>
@@ -80,4 +81,10 @@ detect plant diseases, forecast the weather, and predict the sunspot.</string>
     <string name="image_saved">Image Saved</string>
     <string name="hello_indosat">Hello, Indosat</string>
     <string name="backbutton">backButton</string>
+    <string name="wait">Please Wait...</string>
+    <string name="logging">Logging In....</string>
+    <string name="invalidEmail">Invalid Email Format</string>
+    <string name="enterPas">Please Enter Your Password</string>
+    <string name="enterName">Please Enter Your Username</string>
+    <string name="pasMust6">Password must at least 6 character</string>
 </resources>

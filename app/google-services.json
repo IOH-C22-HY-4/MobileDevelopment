@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "500228786774",
+    "firebase_url": "https://hy-ponics-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hy-ponics",
+    "storage_bucket": "hy-ponics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500228786774:android:e2a7eadeccfa66942f09f7",
+        "android_client_info": {
+          "package_name": "com.ioh_c22_h2_4.hy_ponics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500228786774-rprlrbedvipaennol6p7cht12fbcrn7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4mt5BrCM91z4VJU0qLztsoR2OL3nBol0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500228786774-rprlrbedvipaennol6p7cht12fbcrn7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
