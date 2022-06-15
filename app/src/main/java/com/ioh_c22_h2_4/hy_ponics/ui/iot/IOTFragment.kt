@@ -1,10 +1,12 @@
-package com.ioh_c22_h2_4.hy_ponics
+package com.ioh_c22_h2_4.hy_ponics.ui.iot
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -13,12 +15,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIotBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 
+@AndroidEntryPoint
 class IOTFragment : Fragment() {
 
     private var _binding: FragmentIotBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: IOTViewModel by viewModels()
 
     private lateinit var auth : FirebaseAuth
 
@@ -34,6 +40,9 @@ class IOTFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.sensor.observe(viewLifecycleOwner) {
+            Log.d(this.javaClass.simpleName, "$it")
+        }
         auth = FirebaseAuth.getInstance()
         loadUserInfo()
 
