@@ -22,15 +22,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SmallSp" />
 
-    <TextView
+    <me.biubiubiu.justifytext.library.JustifyTextView
         android:id="@+id/aboutApp"
-        android:layout_width="328dp"
-        android:layout_height="187dp"
+        android:layout_width="361dp"
+        android:layout_height="170dp"
         android:layout_marginTop="24dp"
         android:text="@string/aboutThisApp"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/hyPonics"
+        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="@+id/hyPonics"
         app:layout_constraintTop_toBottomOf="@+id/hyPonics"
         tools:ignore="SmallSp" />
@@ -43,6 +44,7 @@
         android:text="@string/features"
         android:textAlignment="center"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/aboutApp"
         app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +82,7 @@
         android:text="@string/needHelp"
         android:textAlignment="center"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/moreToComeFeatures"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/moreToComeFeatures"

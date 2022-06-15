@@ -82,6 +82,9 @@
         <action
             android:id="@+id/action_settingMenuFragment_to_aboutFragment2"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_settingMenuFragment_to_themeFragment"
+            app:destination="@id/themeFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationMenuFragment"
@@ -107,4 +110,8 @@
         android:name="com.ioh_c22_h2_4.hy_ponics.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/themeFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.ThemeFragment"
+        android:label="ThemeFragment" />
 </navigation>
