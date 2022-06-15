@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/IOTFragment"
-        android:name="com.ioh_c22_h2_4.hy_ponics.IOTFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.ui.iot.IOTFragment"
         android:label="fragment_iot"
         tools:layout="@layout/fragment_iot">
         <action
