@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -49,7 +50,7 @@ class IOTFragment : Fragment() {
 
         binding.rvParameter.apply {
             adapter = parameterAdapter
-            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
         }
         auth = FirebaseAuth.getInstance()
         loadUserInfo()
