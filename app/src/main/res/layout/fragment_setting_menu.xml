@@ -8,55 +8,50 @@
 
     <Button
         android:id="@+id/theme"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="?attr/colorSurface"
-        android:strokeColor="?attr/colorPrimary"
+        android:layout_marginTop="48dp"
         android:text="@string/theme"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorSurface"
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#33AAAAAA"
-        app:strokeWidth="2dp" />
-
-    <Button
-        android:id="@+id/language"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorSurface"
-        android:strokeColor="?attr/colorPrimary"
-        android:text="@string/language"
-        android:textAlignment="textStart"
-        android:textColor="?attr/colorOnSurface"
-        android:textStyle="bold"
-        app:cornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/theme"
-        app:layout_constraintStart_toStartOf="@+id/theme"
-        app:layout_constraintTop_toBottomOf="@+id/theme"
-        app:rippleColor="#33AAAAAA"
-        app:strokeWidth="2dp" />
+        app:rippleColor="#33AAAAAA" />
 
     <Button
         android:id="@+id/about"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorSurface"
+        android:layout_marginTop="4dp"
         android:text="@string/about"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorSurface"
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="@+id/language"
         app:layout_constraintStart_toStartOf="@+id/language"
         app:layout_constraintTop_toBottomOf="@+id/language"
-        app:rippleColor="#33AAAAAA"
-        app:strokeWidth="2dp"/>
+        app:rippleColor="#33AAAAAA" />
+
+    <Button
+        android:id="@+id/language"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/language"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorSurface"
+        android:textStyle="bold"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/theme"
+        app:layout_constraintStart_toStartOf="@+id/theme"
+        app:layout_constraintTop_toBottomOf="@+id/theme"
+        app:rippleColor="#33AAAAAA" />
 
     <Button
         android:id="@+id/btnSignOut"
