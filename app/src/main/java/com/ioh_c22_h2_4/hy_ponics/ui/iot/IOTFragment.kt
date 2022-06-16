@@ -1,24 +1,33 @@
-package com.ioh_c22_h2_4.hy_ponics
+package com.ioh_c22_h2_4.hy_ponics.ui.iot
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.ioh_c22_h2_4.hy_ponics.R
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIotBinding
-import java.lang.Exception
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class IOTFragment : Fragment() {
 
     private var _binding: FragmentIotBinding? = null
     private val binding get() = _binding!!
+
+    private val parameterAdapter by lazy { ParameterAdapter() }
+
+    private val viewModel: IOTViewModel by viewModels()
 
     private lateinit var auth : FirebaseAuth
 
@@ -34,10 +43,19 @@ class IOTFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.sensorData.observe(viewLifecycleOwner) {
+            Log.d(this.javaClass.simpleName, "$it")
+            parameterAdapter.submitList(it)
+        }
+
+        binding.rvParameter.apply {
+            adapter = parameterAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
         auth = FirebaseAuth.getInstance()
         loadUserInfo()
 
-        binding.btnEditProfile.setOnClickListener { view ->
+        binding.btnProfileEdit.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_IOTFragment_to_detailProfileFragment)
         }
 
@@ -63,8 +81,8 @@ class IOTFragment : Fragment() {
                         Glide.with(this@IOTFragment)
                             .load(profileImage)
                             .placeholder(R.drawable.img_1)
-                            .into(binding.imgProfile)
-                        binding.tvName.text = username
+                            .into(binding.ivProfileImage)
+                        binding.tvProfileName.text = username
                     }
                     catch (e: Exception){}
 
