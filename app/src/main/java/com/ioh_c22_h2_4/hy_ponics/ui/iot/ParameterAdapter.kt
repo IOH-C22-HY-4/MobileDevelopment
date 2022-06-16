@@ -40,11 +40,12 @@ class ParameterViewHolder(
 
     fun bind(sensorData: SensorData) {
         binding.apply {
-            tittleParameter.text = sensorData.name
-            detailParameter.text = sensorData.name
-            Glide.with(imgParameter)
-                .load(binding.imgParameter)
-                .into(imgParameter)
+            tvTittleParameter.text = sensorData.name
+            tvDetailParameter.text = sensorData.name
+            parameterValue.text = "${sensorData.data}"
+            Glide.with(ivImageParameter)
+                .load(sensorData.img)
+                .into(ivImageParameter)
         }
     }
 
