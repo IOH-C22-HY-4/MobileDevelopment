@@ -43,7 +43,7 @@ class NotificationWorker @AssistedInject constructor(
     private fun createNotificationChannel(sensorData: SensorData) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val descriptionText = "${sensorData.name} melebihi batas aman"
+            val descriptionText = "${sensorData.name} diluar batas aman"
             val channel =
                 NotificationChannel(NOTIFICATION_CHANNEL, NOTIFICATION_CHANNEL, importance).apply {
                     description = descriptionText
