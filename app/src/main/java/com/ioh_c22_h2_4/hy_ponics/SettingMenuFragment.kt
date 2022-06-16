@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentSettingMenuBinding
 import com.ioh_c22_h2_4.hy_ponics.util.Util.logout
@@ -39,6 +40,12 @@ class SettingMenuFragment : Fragment() {
                     }
                 }.create().show()
             }
+        }
+        binding.about.setOnClickListener {
+            it.findNavController().navigate(R.id.action_settingMenuFragment_to_aboutFragment2)
+        }
+        binding.theme.setOnClickListener {
+            it.findNavController().navigate(R.id.action_settingMenuFragment_to_themeFragment)
         }
         super.onViewCreated(view, savedInstanceState)
     }

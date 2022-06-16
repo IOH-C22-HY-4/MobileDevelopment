@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/switchTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/switchTheme"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/btnSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/switchTheme"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/switchTheme"
+        app:layout_constraintTop_toBottomOf="@+id/switchTheme"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dark"
+        android:layout_width="42dp"
+        android:layout_height="46dp"
+        android:src="@drawable/dark_mode"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSwitch"
+        app:layout_constraintStart_toEndOf="@+id/btnSwitch"
+        app:layout_constraintTop_toTopOf="@+id/btnSwitch" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/day"
+        android:layout_width="42dp"
+        android:layout_height="46dp"
+        android:src="@drawable/day_mode"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSwitch"
+        app:layout_constraintEnd_toStartOf="@+id/btnSwitch"
+        app:layout_constraintTop_toTopOf="@+id/btnSwitch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

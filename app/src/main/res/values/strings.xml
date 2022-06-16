@@ -73,7 +73,7 @@ detect plant diseases, forecast the weather, and predict the sunspot.</string>
     <string name="identificationFeatures">- Plant Identification</string>
     <string name="moreToComeFeatures">- More to Come!</string>
     <string name="needHelp">NEED HELP?</string>
-    <string name="detailNeedHelp">You\'ve got questions, we\'ve got answer! Hit us up here :  m2006f0556@bangkit.academy</string>
+    <string name="detailNeedHelp">You\'ve got questions, we\'ve got answer! Hit us up here :  team.hyponics@gmail.com</string>
     <string name="notification">Notification</string>
     <string name="itemsetting">Setting</string>
     <string name="content_description_gallery">Take Image From Gallery</string>
@@ -81,11 +81,12 @@ detect plant diseases, forecast the weather, and predict the sunspot.</string>
     <string name="image_saved">Image Saved</string>
     <string name="hello_indosat">Hello, Indosat</string>
     <string name="backbutton">backButton</string>
-    <string name="wait">Please Wait...</string>
+    <string name="wait">Please Wait…</string>
     <string name="logging">Logging In....</string>
     <string name="invalidEmail">Invalid Email Format</string>
     <string name="enterPas">Please Enter Your Password</string>
     <string name="enterName">Please Enter Your Username</string>
     <string name="pasMust6">Password must at least 6 character</string>
     <string name="setting">Settings</string>
+    <string name="switchTheme">Switch Theme</string>
 </resources>
