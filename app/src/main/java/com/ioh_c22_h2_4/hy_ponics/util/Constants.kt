@@ -11,4 +11,6 @@ object Constants {
     const val ACCURACY_THRESHOLD = 0.5f
     const val IMAGE_INPUT_SIZE = 150
     const val FIREBASE_DATABASE_URL = BuildConfig.FIREBASE_DATABASE_URL
+    const val NOTIFICATION_CHANNEL = "Sensor Warning"
+    const val NOTIFICATION_ID = "NOTIFICATION_ID"
 }
