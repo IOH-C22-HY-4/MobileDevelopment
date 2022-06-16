@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/hint_color_light">
+        android:background="?attr/colorSurface">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/profile_container"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/color_primary"
+            android:backgroundTint="?attr/colorSurface"
             android:elevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -52,7 +52,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_toEndOf="@id/iv_profile_image"
                     android:textAppearance="?attr/textAppearanceListItem"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorOnSurface"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/iv_profile_image"
                     app:layout_constraintTop_toTopOf="@+id/iv_profile_image"
@@ -67,7 +67,7 @@
                     android:layout_toEndOf="@id/iv_profile_image"
                     android:maxLines="2"
                     android:textAppearance="?attr/textAppearanceListItemSecondary"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorOnSurface"
                     app:layout_constraintEnd_toStartOf="@id/btn_profile_edit"
                     app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_profile_name"
@@ -78,13 +78,13 @@
                     android:layout_width="106dp"
                     android:layout_height="35dp"
                     android:layout_marginEnd="5dp"
-                    android:backgroundTint="?attr/colorSurface"
+                    android:backgroundTint="@color/color_primary"
                     android:clickable="false"
                     android:focusable="false"
                     android:text="@string/editProfile"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="?attr/colorOnSurface"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:cornerRadius="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"

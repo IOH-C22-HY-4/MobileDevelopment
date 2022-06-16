@@ -14,7 +14,7 @@
         android:layout_marginTop="48dp"
         android:text="@string/theme"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorSurface"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
         android:layout_marginTop="4dp"
         android:text="@string/about"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorSurface"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="@+id/language"
@@ -45,7 +45,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/language"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorSurface"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="@+id/theme"
@@ -60,17 +60,18 @@
         android:layout_marginTop="340dp"
         android:text="@string/signOut"
         android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about"/>
+        app:layout_constraintTop_toBottomOf="@+id/about" />
 
     <TextView
         android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/version"
-        android:textSize="16sp"
         android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/btnSignOut" />
 </androidx.constraintlayout.widget.ConstraintLayout>
