@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="app_name" translatable="false">HyPonics</string>
+    <string name="created_by_team">Oleh C22 HY04</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="email_example" translatable="false">asdfgh@example.com</string>
+    <string name="password">Kata Sandi</string>
+    <string name="clickable_login"><u>Masuk</u></string>
+    <string name="sign_up"><u>Daftar</u></string>
+    <string name="dont_have_an_account">Belum punya akun ?</string>
+    <string name="clickable_sign_up"><u>Daftar</u></string>
+    <string name="sign_up_text">Create an account to be a Certified Hy.ponics</string>
+    <string name="name">Nama</string>
+    <string name="name_example" translatable="false">Rahmat Dewa Wisnu</string>
+    <string name="by_signing_text">Dengan mendaftar anda setuju dengan</string>
+    <string name="terms_text">ketentuan dan kebijakan privasi</string>
+    <string name="already_have_account">Sudah punya akun ?</string>
+    <string name="imgWarning" translatable="false">Image Warning</string>
+    <string name="titleWarning" translatable="false">Tittle Warning</string>
+    <string name="detailWarning" translatable="false">Detail Warning</string>
+    <string name="account">Akun</string>
+    <string name="theme">Tema</string>
+    <string name="language">Bahasa</string>
+    <string name="about">Tentang</string>
+    <string name="signOut">Keluar</string>
+    <string name="version">Versi 1.0.0</string>
+    <string name="btnAdd" translatable="false">Button Add</string>
+    <string name="imgArticle" translatable="false">Image Article</string>
+    <string name="titleArticle" translatable="false">Tittle Article</string>
+    <string name="detailArticle" translatable="false">Detail Article</string>
+    <string name="login">Masuk</string>
+    <string name="login_your_hyponics">Masuk ke akun Hy.ponics mu</string>
+    <string name="titleArt">Title Article</string>
+    <string name="article_image">article image</string>
+    <string name="description">Description</string>
+    <string name="back" translatable="false">Back</string>
+    <string name="imgProfile" translatable="false">Image Profile</string>
+    <string name="bio">Bio</string>
+    <string name="bio_example">Saya sangat suka selada</string>
+    <string name="address">Alamat</string>
+    <string name="address_example">Jl nin aja dulu</string>
+    <string name="saveChange">simpan</string>
+    <string name="btnChangeProfile" translatable="false">Button Change Profile</string>
+    <string name="tanaman_name">Name Plant</string>
+    <string name="parameter">Parameter</string>
+    <string name="percent" translatable="false">0%</string>
+    <string name="title_parameter" translatable="false">Parameter</string>
+    <string name="detail_parameter">Detail Parameter</string>
+    <string name="editProfile">ubah profil</string>
+    <string name="imgIOT">Image IOT</string>
+    <string name="tvIOTResult">Hasil Sensor IoT</string>
+    <string name="tvNameIOT">Tanaman Selalada</string>
+    <string name="today_weather">Cuaca Hari Ini</string>
+    <string name="temp">Suhu</string>
+    <string name="sunlight">Sunlight</string>
+    <string name="humidity">Humidity</string>
+    <string name="clouds">Clouds</string>
+    <string name="hint_search">Cari artikel</string>
+    <string name="hyponics_article">Artikel Hyponics</string>
+    <string name="popular_article">Popular Article</string>
+    <string name="other_article">Other Article</string>
+    <string name="home">Beranda</string>
+    <string name="identification">Identifikasi</string>
+    <string name="market_place">Jual Beli</string>
+    <string name="profile">Profil</string>
+    <string name="aboutThisApp">Hidroponik adalah teknik budidaya tanaman yang tidak membutuhkan lahan yang luas, IoT
+terintegrasi dengan aplikasi mobile akan sangat membantu kegiatan ini. IoT digunakan untuk mendapatkan pabrik
+nilai parameter yang dapat dipantau dari jarak jauh. Nilai yang diukur mengaktifkan aktuator
+dan memastikan bahwa nilai yang diukur tidak di bawah batas. Sementara itu, aplikasi seluler dapat
+mengelola dan mengontrol IoT. Teknologi ini dapat dimaksimalkan dengan machine learning, yaitu untuk
+mendeteksi penyakit tanaman, meramalkan cuaca, dan memprediksi bintik matahari.</string>
+    <string name="hyPonics">HY.PONICS</string>
+    <string name="features">FITUR</string>
+    <string name="identificationFeatures">- Identifikasi Tanaman</string>
+    <string name="moreToComeFeatures">- Akan hadir lagi!</string>
+    <string name="needHelp">BUTUH BANTUAN?</string>
+    <string name="detailNeedHelp">Jika anda mempunyai pertanyaan, hubungi kami :  team.hyponics@gmail.com</string>
+    <string name="notification">Notifikasi</string>
+    <string name="itemsetting">Pengaturan</string>
+    <string name="content_description_gallery">Take Image From Gallery</string>
+    <string name="content_description_camera">Take Image From Camera</string>
+    <string name="image_saved">Gambar Tersimpan</string>
+    <string name="hello_indosat">Hello, Indosat</string>
+    <string name="backbutton" translatable="false">backButton</string>
+    <string name="wait">Harap menunggu</string>
+    <string name="logging">Masuk....</string>
+    <string name="invalidEmail">Email Format Salah</string>
+    <string name="enterPas">Masukkan kata sandi</string>
+    <string name="enterName">Masukkan nama</string>
+    <string name="pasMust6">Kata sandi minimal 6 karakter</string>
+    <string name="setting">Pengaturan</string>
+    <string name="switchTheme">Ganti Tema</string></resources>
