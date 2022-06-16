@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">HyPonics</string>
+    <string name="app_name" translatable="false">HyPonics</string>
     <string name="created_by_team">Created By C22 HY04</string>
-    <string name="email">Email</string>
-    <string name="email_example">asdfgh@example.com</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="email_example" translatable="false">asdfgh@example.com</string>
     <string name="password">Password</string>
     <string name="clickable_login"><u>Login</u></string>
     <string name="sign_up"><u>Sign up</u></string>
@@ -10,40 +10,40 @@
     <string name="clickable_sign_up"><u>Sign up</u></string>
     <string name="sign_up_text">Create an account to be a Certified Hy.ponics</string>
     <string name="name">Name</string>
-    <string name="name_example">Rahmat Dewa Wisnu</string>
+    <string name="name_example" translatable="false">Rahmat Dewa Wisnu</string>
     <string name="by_signing_text">By signing you agree to our</string>
     <string name="terms_text">terms of use and privacy notice</string>
     <string name="already_have_account">Already have an account ?</string>
-    <string name="imgWarning">Image Warning</string>
-    <string name="titleWarning">Tittle Warning</string>
-    <string name="detailWarning">Detail Warning</string>
+    <string name="imgWarning" translatable="false">Image Warning</string>
+    <string name="titleWarning" translatable="false">Tittle Warning</string>
+    <string name="detailWarning" translatable="false">Detail Warning</string>
     <string name="account">Account</string>
     <string name="theme">Theme</string>
     <string name="language">Language</string>
     <string name="about">About</string>
     <string name="signOut">Sign Out</string>
     <string name="version">Version 1.0.0</string>
-    <string name="btnAdd">Button Add</string>
-    <string name="imgArticle">Image Article</string>
-    <string name="titleArticle">Tittle Article</string>
-    <string name="detailArticle">Detail Article</string>
+    <string name="btnAdd" translatable="false">Button Add</string>
+    <string name="imgArticle" translatable="false">Image Article</string>
+    <string name="titleArticle" translatable="false">Tittle Article</string>
+    <string name="detailArticle" translatable="false">Detail Article</string>
     <string name="login">Login</string>
     <string name="login_your_hyponics">Login your Hy.ponics account</string>
-    <string name="titleArt">Title Article</string>
-    <string name="article_image">article image</string>
-    <string name="description">Description</string>
-    <string name="back">Back</string>
-    <string name="imgProfile">Image Profile</string>
+    <string name="titleArt" translatable="false">Title Article</string>
+    <string name="article_image" translatable="false">article image</string>
+    <string name="description" translatable="false">Description</string>
+    <string name="back" translatable="false">Back</string>
+    <string name="imgProfile" translatable="false">Image Profile</string>
     <string name="bio">Bio</string>
     <string name="bio_example">I love lettuce so much</string>
     <string name="address">Address</string>
     <string name="address_example">Jl nin aja dulu</string>
     <string name="saveChange">save</string>
-    <string name="btnChangeProfile">Button Change Profile</string>
+    <string name="btnChangeProfile" translatable="false">Button Change Profile</string>
     <string name="tanaman_name">Name Plant</string>
     <string name="parameter">Parameter</string>
-    <string name="percent">0%</string>
-    <string name="title_parameter">Parameter</string>
+    <string name="percent" translatable="false">0%</string>
+    <string name="title_parameter" translatable="false">Parameter</string>
     <string name="detail_parameter">Detail Parameter</string>
     <string name="editProfile">edit profile</string>
     <string name="imgIOT">Image IOT</string>
@@ -68,7 +68,7 @@ parameter values that can be monitored remotely. The measured value activates th
 and ensures that the measured value is not below the limit. Meanwhile, mobile applications can
 manage and control IoT. This technology can be maximized with machine learning, which is to
 detect plant diseases, forecast the weather, and predict the sunspot.</string>
-    <string name="hyPonics">Hy.ponics</string>
+    <string name="hyPonics">HY.PONICS</string>
     <string name="features">FEATURES</string>
     <string name="identificationFeatures">- Plant Identification</string>
     <string name="moreToComeFeatures">- More to Come!</string>
@@ -80,7 +80,7 @@ detect plant diseases, forecast the weather, and predict the sunspot.</string>
     <string name="content_description_camera">Take Image From Camera</string>
     <string name="image_saved">Image Saved</string>
     <string name="hello_indosat">Hello, Indosat</string>
-    <string name="backbutton">backButton</string>
+    <string name="backbutton" translatable="false">backButton</string>
     <string name="wait">Please Wait…</string>
     <string name="logging">Logging In....</string>
     <string name="invalidEmail">Invalid Email Format</string>
