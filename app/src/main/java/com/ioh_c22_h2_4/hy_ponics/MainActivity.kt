@@ -6,9 +6,15 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.ioh_c22_h2_4.hy_ponics.databinding.ActivityMainBinding
 import com.ioh_c22_h2_4.hy_ponics.helper.PrefHelper
+import com.ioh_c22_h2_4.hy_ponics.util.Constants.NOTIFICATION_CHANNEL
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -25,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
-        when (pref.getBoolean("pref_is_dark_mode")){
+        when (pref.getBoolean("pref_is_dark_mode")) {
             true -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
@@ -33,5 +39,22 @@ class MainActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+
+        val workManager = WorkManager.getInstance(this.applicationContext)
+
+        val constraint = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresDeviceIdle(false)
+            .setRequiresBatteryNotLow(false)
+            .build()
+
+        val notificationWorkRequest = PeriodicWorkRequestBuilder<NotificationWorker>(
+            15L, TimeUnit.MINUTES,
+        ).setConstraints(constraint)
+            .addTag(NOTIFICATION_CHANNEL)
+            .build()
+
+
+        workManager.enqueue(notificationWorkRequest)
     }
 }
