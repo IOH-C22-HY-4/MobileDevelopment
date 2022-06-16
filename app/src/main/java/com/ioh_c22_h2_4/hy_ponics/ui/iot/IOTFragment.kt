@@ -7,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.ioh_c22_h2_4.hy_ponics.R
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentIotBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
 
 @AndroidEntryPoint
 class IOTFragment : Fragment() {
@@ -55,7 +55,7 @@ class IOTFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         loadUserInfo()
 
-        binding.btnEditProfile.setOnClickListener { view ->
+        binding.btnProfileEdit.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_IOTFragment_to_detailProfileFragment)
         }
 
@@ -81,8 +81,8 @@ class IOTFragment : Fragment() {
                         Glide.with(this@IOTFragment)
                             .load(profileImage)
                             .placeholder(R.drawable.img_1)
-                            .into(binding.imgProfile)
-                        binding.tvName.text = username
+                            .into(binding.ivProfileImage)
+                        binding.tvProfileName.text = username
                     }
                     catch (e: Exception){}
 
