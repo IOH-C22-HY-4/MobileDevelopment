@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ioh_c22_h2_4.hy_ponics.data.sensor.SensorData
 import com.ioh_c22_h2_4.hy_ponics.databinding.ItemRowParameterBinding
+import kotlin.math.roundToInt
 
 class ParameterAdapter : ListAdapter<SensorData, ParameterViewHolder>(Comparator) {
 
@@ -42,7 +43,17 @@ class ParameterViewHolder(
         binding.apply {
             tvTittleParameter.text = sensorData.name
             tvDetailParameter.text = sensorData.name
-            parameterValue.text = "${sensorData.data}"
+            when (sensorData.name) {
+                "EC Sensor" -> {
+                    parameterValue.text = String.format("%.2f S/cm", sensorData.data)
+                }
+                "pH Sensor" -> {
+                    parameterValue.text = String.format("%.1f", sensorData.data)
+                }
+                "TDS Sensor" -> {
+                    parameterValue.text = String.format("%d ppm", sensorData.data.roundToInt())
+                }
+            }
             Glide.with(ivImageParameter)
                 .load(sensorData.img)
                 .into(ivImageParameter)
