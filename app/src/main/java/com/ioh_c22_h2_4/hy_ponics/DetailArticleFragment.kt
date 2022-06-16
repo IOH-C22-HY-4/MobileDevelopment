@@ -27,6 +27,9 @@ class DetailArticleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.ivBack.setOnClickListener {
+            it.findNavController().navigate(R.id.action_detailArticleFragment_to_homeFragment)
+        }
         super.onViewCreated(view, savedInstanceState)
         val article = args.idArticle
 
@@ -35,10 +38,8 @@ class DetailArticleFragment : Fragment() {
             .into(_binding?.ivArticleImage!!)
         _binding!!.tvTitleArticle.text = article.title
         _binding!!.tvDescription.text = article.content
-        _binding!!.ivBack.setOnClickListener {
-            it.findNavController().navigate(R.id.action_detailArticleFragment_to_homeFragment)
         }
-    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

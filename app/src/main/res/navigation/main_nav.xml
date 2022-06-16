@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_IOTFragment_to_notificationMenuFragment"
             app:destination="@id/notificationMenuFragment" />
+        <action
+            android:id="@+id/action_IOTFragment_to_detailProfileIOTFragment"
+            app:destination="@id/detailProfileIOTFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProfileFragment"
@@ -111,4 +114,13 @@
         android:id="@+id/themeFragment"
         android:name="com.ioh_c22_h2_4.hy_ponics.ThemeFragment"
         android:label="ThemeFragment" />
+    <fragment
+        android:id="@+id/detailProfileIOTFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.DetailProfileIOTFragment"
+        android:label="fragment_detail_profile_i_o_t"
+        tools:layout="@layout/fragment_detail_profile_i_o_t" >
+        <action
+            android:id="@+id/action_detailProfileIOTFragment_to_IOTFragment"
+            app:destination="@id/IOTFragment" />
+    </fragment>
 </navigation>
