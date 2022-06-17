@@ -41,7 +41,7 @@
     <string name="saveChange">simpan</string>
     <string name="btnChangeProfile" translatable="false">Button Change Profile</string>
     <string name="tanaman_name">Name Plant</string>
-    <string name="parameter">Parameter</string>
+    <string name="parameter">Parameter Terbaik</string>
     <string name="percent" translatable="false">0%</string>
     <string name="title_parameter" translatable="false">Parameter</string>
     <string name="detail_parameter">Detail Parameter</string>
