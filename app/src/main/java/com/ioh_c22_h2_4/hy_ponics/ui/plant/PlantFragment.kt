@@ -1,4 +1,4 @@
-package com.ioh_c22_h2_4.hy_ponics
+package com.ioh_c22_h2_4.hy_ponics.ui.plant
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.ioh_c22_h2_4.hy_ponics.SharedViewModel
 import com.ioh_c22_h2_4.hy_ponics.databinding.FragmentPlantBinding
 
 class PlantFragment : Fragment() {

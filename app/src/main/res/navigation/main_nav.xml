@@ -98,7 +98,7 @@
         tools:layout="@layout/fragment_market_place" />
     <fragment
         android:id="@+id/tanamanFragment"
-        android:name="com.ioh_c22_h2_4.hy_ponics.PlantFragment"
+        android:name="com.ioh_c22_h2_4.hy_ponics.ui.plant.PlantFragment"
         android:label="fragment_tanaman"
         tools:layout="@layout/fragment_plant" >
         <action
