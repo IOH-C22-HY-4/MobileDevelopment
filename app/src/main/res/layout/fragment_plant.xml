@@ -40,7 +40,7 @@
                 android:id="@+id/tv_plant_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/bold"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="20sp"
@@ -53,24 +53,38 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/medium"
                 android:text="@string/parameter"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_plant_name" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="0dp"
+            <include
+                android:id="@+id/ec_parameter"
+                layout="@layout/item_row_parameter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_plant_name"
-                tools:listitem="@layout/item_row_parameter" />
+                app:layout_constraintBottom_toTopOf="@+id/tds_parameter"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <include
+                android:id="@+id/tds_parameter"
+                layout="@layout/item_row_parameter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/ph_parameter"
+                app:layout_constraintTop_toBottomOf="@+id/ec_parameter" />
+
+            <include
+                android:id="@+id/ph_parameter"
+                layout="@layout/item_row_parameter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tds_parameter" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
