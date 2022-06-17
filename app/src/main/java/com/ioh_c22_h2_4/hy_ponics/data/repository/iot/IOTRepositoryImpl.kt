@@ -1,4 +1,4 @@
-package com.ioh_c22_h2_4.hy_ponics.data.repository
+package com.ioh_c22_h2_4.hy_ponics.data.repository.iot
 
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
