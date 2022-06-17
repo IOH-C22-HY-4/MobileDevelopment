@@ -48,7 +48,7 @@
     <string name="editProfile">edit profile</string>
     <string name="imgIOT">Image IOT</string>
     <string name="tvIOTResult">IoT Sensor Result</string>
-    <string name="tvNameIOT">Tanaman Selalada</string>
+    <string name="tvNameIOT">Plant Name</string>
     <string name="today_weather">Today Weather</string>
     <string name="temp">Temp</string>
     <string name="sunlight">Sunlight</string>
@@ -89,4 +89,9 @@ detect plant diseases, forecast the weather, and predict the sunspot.</string>
     <string name="pasMust6">Password must at least 6 character</string>
     <string name="setting">Settings</string>
     <string name="switchTheme">Switch Theme</string>
+    <string name="coomingSoon">Cooming Soon</string>
+    <string name="name_IOT">Plant name</string>
+    <string name="namePlant">Your plant name</string>
+    <string name="name_example_iot">Input your plant name</string>
+    <string name="editProfileIOT">Edit IOT</string>
 </resources>

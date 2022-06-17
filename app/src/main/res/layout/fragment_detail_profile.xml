@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailProfileFragment">
+    tools:context=".DetailProfileFragment"
+    tools:ignore="ScrollViewCount">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfile"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/imgProfile"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,22 +22,22 @@
         android:id="@+id/btnChangeProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="84dp"
         android:background="?attr/colorSurface"
+        android:contentDescription="@string/btnChangeProfile"
         android:src="@drawable/ic_change_profile"
         app:backgroundTint="?attr/colorSurface"
         app:fabCustomSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="@+id/imgProfile"
-        app:layout_constraintTop_toTopOf="@+id/imgProfile"
-        android:contentDescription="@string/btnChangeProfile" />
+        app:layout_constraintTop_toTopOf="@+id/imgProfile" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/label_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/name"
         android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
@@ -78,7 +78,7 @@
         android:id="@+id/label_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/email"
         android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
@@ -119,7 +119,7 @@
         android:id="@+id/label_bio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:text="@string/bio"
         android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
@@ -160,7 +160,7 @@
         android:id="@+id/label_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:text="@string/address"
         android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
@@ -207,9 +207,10 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/address_container"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.008" />
 
     <TextView
         android:id="@+id/version"

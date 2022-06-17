@@ -48,7 +48,7 @@
     <string name="editProfile">ubah profil</string>
     <string name="imgIOT">Image IOT</string>
     <string name="tvIOTResult">Hasil Sensor IoT</string>
-    <string name="tvNameIOT">Tanaman Selalada</string>
+    <string name="tvNameIOT">Nama Tanaman</string>
     <string name="today_weather">Cuaca Hari Ini</string>
     <string name="temp">Suhu</string>
     <string name="sunlight">Sunlight</string>
@@ -88,4 +88,10 @@ mendeteksi penyakit tanaman, meramalkan cuaca, dan memprediksi bintik matahari.<
     <string name="enterName">Masukkan nama</string>
     <string name="pasMust6">Kata sandi minimal 6 karakter</string>
     <string name="setting">Pengaturan</string>
-    <string name="switchTheme">Ganti Tema</string></resources>
+    <string name="switchTheme">Ganti Tema</string>
+    <string name="coomingSoon">Segera Hadir</string>
+    <string name="name_IOT">Nama Tanaman</string>
+    <string name="namePlant">Nama Tanamanmu</string>
+    <string name="name_example_iot">Masukkan nama tanamanmu</string>
+    <string name="editProfileIOT">Edit IOT</string>
+</resources>

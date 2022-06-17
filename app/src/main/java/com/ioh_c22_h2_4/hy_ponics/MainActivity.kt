@@ -1,6 +1,8 @@
 package com.ioh_c22_h2_4.hy_ponics
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
@@ -23,22 +25,12 @@ class MainActivity : AppCompatActivity() {
     private val navHostFragment by lazy { supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment }
     private val navController by lazy { navHostFragment.findNavController() }
 
-    private val pref by lazy {PrefHelper(this)}
-
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         binding.bottomNav.setupWithNavController(navController)
-
-        when (pref.getBoolean("pref_is_dark_mode")) {
-            true -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            false -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        }
 
         val workManager = WorkManager.getInstance(this.applicationContext)
 

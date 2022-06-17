@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/hint_color_light">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profile_picture"
@@ -18,19 +19,19 @@
             android:layout_marginTop="16dp"
             android:elevation="8dp"
             android:src="@drawable/ic_profile"
-            android:tint="?attr/colorSurface"
+            android:tint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorSurface" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/helloUser"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:elevation="8dp"
             android:text="@string/hello_indosat"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="?attr/colorSurface"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/profile_picture"
             app:layout_constraintStart_toEndOf="@+id/profile_picture"
             app:layout_constraintTop_toTopOf="@+id/profile_picture" />
@@ -58,7 +59,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
-            app:layout_constraintBottom_toTopOf="@id/weather_card"
+            app:layout_constraintBottom_toBottomOf="@+id/background_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_picture"
@@ -73,32 +74,10 @@
                 android:hint="@string/hint_search"
                 android:inputType="text"
                 android:padding="16dp"
-                android:textColor="?attr/colorOnSurface" />
+                android:textColor="?attr/colorOnSurface"
+                android:tint="?attr/colorOnSurface" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/today_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/today_weather"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textColor="?attr/colorSurface"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/search_container"
-            app:layout_constraintTop_toBottomOf="@+id/search_container" />
-
-        <include
-            android:id="@+id/weather_card"
-            layout="@layout/card_today_weather"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/today_weather" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/header_popular_article"
@@ -109,17 +88,21 @@
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/weather_card"
-            app:layout_constraintTop_toBottomOf="@+id/weather_card" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintStart_toStartOf="@+id/background_image"
+            app:layout_constraintTop_toBottomOf="@+id/background_image" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular_article"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="?attr/colorSurface"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_popular_article"
             tools:listitem="@layout/item_article" />

@@ -1,6 +1,7 @@
 package com.ioh_c22_h2_4.hy_ponics.util
 
 import com.ioh_c22_h2_4.hy_ponics.BuildConfig
+import com.ioh_c22_h2_4.hy_ponics.util.Constants.FIREBASE_DATABASE_URL
 
 object Constants {
     const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"

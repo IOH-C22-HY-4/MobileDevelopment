@@ -55,12 +55,15 @@ class IOTFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         loadUserInfo()
 
-        binding.btnProfileEdit.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_IOTFragment_to_detailProfileFragment)
+        binding.btnProfileEdit.setOnClickListener {
+            it.findNavController().navigate(R.id.action_IOTFragment_to_detailProfileFragment)
         }
 
-        binding.settings.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_IOTFragment_to_settingMenuFragment)
+        binding.settings.setOnClickListener {
+            it.findNavController().navigate(R.id.action_IOTFragment_to_settingMenuFragment)
+        }
+        binding.btnChangeProfileIOT.setOnClickListener {
+            it.findNavController().navigate(R.id.action_IOTFragment_to_detailProfileIOTFragment)
         }
 
     }
@@ -70,19 +73,27 @@ class IOTFragment : Fragment() {
         ref.child(auth.uid!!)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val email = "${snapshot.child("email").value}"
                     val username = "${snapshot.child("username").value}"
                     val profileImage = "${snapshot.child("profileImage").value}"
-                    val uid = "${snapshot.child("uid").value}"
-
+                    val address = "${snapshot.child("address").value}"
+                    val usernameIOT = "${snapshot.child("usernameIOT").value}"
+                    val profileImageIOT = "${snapshot.child("profileImageIOT").value}"
 
 
                     try {
                         Glide.with(this@IOTFragment)
+                            .load(profileImageIOT)
+                            .placeholder(R.drawable.add_photo)
+                            .into(binding.ivIotResult)
+
+                        Glide.with(this@IOTFragment)
                             .load(profileImage)
                             .placeholder(R.drawable.img_1)
                             .into(binding.ivProfileImage)
+
                         binding.tvProfileName.text = username
+                        binding.tvProfileAddress.text = address
+                        binding.tvNameIot.text = usernameIOT
                     }
                     catch (e: Exception){}
 
