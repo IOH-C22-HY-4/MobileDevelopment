@@ -57,6 +57,8 @@ class NotificationWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
 
+        var isShown = false
+
         iotRepository.getSensorData().collect {
             val isEcSafe = it[0].data > 1.5 && it[0].data < 1.8
             val isPhSafe = it[1].data > 6.5 && it[1].data < 7
@@ -90,6 +92,7 @@ class NotificationWorker @AssistedInject constructor(
                 createNotificationChannel(ec)
                 with(NotificationManagerCompat.from(ctx)) {
                     notify(ec.data.toInt(), notification.build())
+                    isShown = true
                 }
             }
             if (!isPhSafe) {
@@ -105,6 +108,7 @@ class NotificationWorker @AssistedInject constructor(
                 createNotificationChannel(ph)
                 with(NotificationManagerCompat.from(ctx)) {
                     notify(ph.data.toInt(), notification.build())
+                    isShown = true
                 }
             }
             if (!isTdsSafe) {
@@ -120,10 +124,11 @@ class NotificationWorker @AssistedInject constructor(
                 createNotificationChannel(tds)
                 with(NotificationManagerCompat.from(ctx)) {
                     notify(tds.data.toInt(), notification.build())
+                    isShown = true
                 }
             }
         }
 
-        return Result.success()
+        return if (isShown) Result.success() else Result.failure()
     }
 }
