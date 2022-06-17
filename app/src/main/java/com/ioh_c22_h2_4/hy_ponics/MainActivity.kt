@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.Constraints
 import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.ioh_c22_h2_4.hy_ponics.databinding.ActivityMainBinding
 import com.ioh_c22_h2_4.hy_ponics.helper.PrefHelper
@@ -38,11 +38,12 @@ class MainActivity : AppCompatActivity() {
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .setRequiresDeviceIdle(false)
             .setRequiresBatteryNotLow(false)
+            .setTriggerContentMaxDelay(15L, TimeUnit.MINUTES)
             .build()
 
-        val notificationWorkRequest = PeriodicWorkRequestBuilder<NotificationWorker>(
-            15L, TimeUnit.MINUTES,
+        val notificationWorkRequest = OneTimeWorkRequestBuilder<NotificationWorker>(
         ).setConstraints(constraint)
+            .setInitialDelay(15L, TimeUnit.MINUTES)
             .addTag(NOTIFICATION_CHANNEL)
             .build()
 

@@ -19,6 +19,7 @@ import com.ioh_c22_h2_4.hy_ponics.util.Constants.NOTIFICATION_CHANNEL
 import com.ioh_c22_h2_4.hy_ponics.util.Constants.NOTIFICATION_ID
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 
 @HiltWorker
@@ -42,7 +43,7 @@ class NotificationWorker @AssistedInject constructor(
     private fun createNotificationChannel(sensorData: SensorData) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val descriptionText = "${sensorData.name} melebihi batas aman"
+            val descriptionText = "${sensorData.name} diluar batas aman"
             val channel =
                 NotificationChannel(NOTIFICATION_CHANNEL, NOTIFICATION_CHANNEL, importance).apply {
                     description = descriptionText
@@ -55,13 +56,15 @@ class NotificationWorker @AssistedInject constructor(
     }
 
     override suspend fun doWork(): Result {
-        iotRepository.getSensorData().collect {
 
+        iotRepository.getSensorData().collect {
             val isEcSafe = it[0].data > 1.5 && it[0].data < 1.8
             val isPhSafe = it[1].data > 6.5 && it[1].data < 7
             val isTdsSafe = it[2].data > 560 && it[2].data < 840
 
             val className = this@NotificationWorker.javaClass.simpleName
+
+            delay(900000)
 
             Log.d(className, "$isEcSafe")
             Log.d(className, "$isPhSafe")
